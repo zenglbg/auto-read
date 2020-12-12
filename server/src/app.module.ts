@@ -1,0 +1,50 @@
+import { Module, MiddlewareConsumer } from '@nestjs/common';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
+
+/** common */
+import { ApiParamsValidationPipe } from './common/pipes/api-params-validation.pipe';
+import { LoggerMiddleware } from './common/middleware/LoggerMiddleware';
+import { HttpExceptionFilter } from './common/filters/http-exception.filter';
+import { LoggingInterceptor } from './common/interceptors/Logging.interceptor';
+import { TransformInterceptor } from './common/interceptors/transform.interceptor';
+
+/** common */
+
+/** module */
+import { configModule } from './modules/config/config.module';
+import { RasModule } from './modules/ras/ras.module';
+import { orm } from './modules/database/database.module';
+import { AuthModule } from '@modules/auth/auth.module';
+import { UserModule } from '@modules/user/user.module';
+
+/** module */
+@Module({
+  imports: [configModule(), orm(), AuthModule, UserModule, RasModule],
+  controllers: [AppController],
+  providers: [
+    AppService,
+    {
+      provide: APP_FILTER,
+      useClass: HttpExceptionFilter,
+    },
+    {
+      provide: APP_PIPE,
+      useClass: ApiParamsValidationPipe,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: LoggingInterceptor,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: TransformInterceptor,
+    },
+  ],
+})
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoggerMiddleware).forRoutes('user');
+  }
+}

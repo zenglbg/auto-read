@@ -1,0 +1,1734 @@
+<drawer id="drawer">
+  <vertical h="*" gravity="center">
+    <appbar>
+      <toolbar bg="{{my_color}}" id="toolbar" title={names} size="16" h="36" >
+        <button bg="{{my_color}}" id="BtnExit" layout_gravity="right" textColor="#ffffff" text="离开" style="Widget.AppCompat.Button.Borderless.Colored" w="auto" />
+        <button bg="{{my_color}}" id="help" layout_gravity="right" textColor="#ffffff" text="使用教程" h={jiaocheng_h} style="Widget.AppCompat.Button.Borderless.Colored" w="auto" />
+      </toolbar>
+      <tabs id="tabs" size="14" h="28" bg="{{my_color}}" tabIndicatorColor="#FFFFFF"/>
+      <vertical id = "logo" gravity="center" bg="#ffffff" w="*" h="132">
+        <img w="*" h="*" src ={logo.get('src',[""])}  scaleType="fitXY"/>
+      </vertical>
+      <button id="Run_Btn" text="点击开始运行[音量-停止运行]" tag="ScriptTag" color="#ffffff" bg="{{my_color}}" foreground="?selectableItemBackground"/>
+    </appbar>
+    <viewpager h="*" id="pager">
+      <frame>
+        <card w="*" h="*" margin="5" cardCornerRadius="6dp">
+          <ScrollView layout_width="match_parent"  layout_gravity="center">
+            <vertical>
+              <horizontal layout_width="match_parent" margin="12 5"  elevation="1dp">
+                <text text="注册码:" gravity="left" textColor="#444444" size="12sp" />
+                <input id="jhm" gravity="left"  onfocus="this.blur();" hint = "请输入注册码" text={storage.get("jhm",[""])} textSize="12sp" textSizeHint = "12sp"/>
+                <button id="code_check" text="激活/查询" h="28" w="60" textSize="8sp" padding="0 2" margin="2 0" textColor="#FFFFFF" bg="{{my_color}}" style="Widget.AppCompat.Button.Borderless.Colored"/>
+                <button id="rizhi" text="日志" h="28" w="60" textSize="8sp" padding="0 2" margin="2 0" textColor="#FFFFFF" bg="{{my_color}}" style="Widget.AppCompat.Button.Borderless.Colored"/>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent" margin="12 5"  elevation="1dp">
+                <text text="联众打码账号:" textColor="#444444" size="12sp"/>
+                <text text="密码:" textColor="#444444" size="12sp"/>
+                <input id="联众账号" hint = "请输入账号" text={storage.get("联众账号","")} textColor="#444444" w="auto" textSize="12sp" textSizeHint = "12sp"/>
+                <input id="联众密码" hint = "请输入密码" text={storage.get("联众密码","")} textColor="#444444" w="auto" textSize="12sp" textSizeHint = "12sp"/>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent"   margin="5 5">
+                <Switch id="yjxx" checked ={storage.get("yjxx",[true])}/>
+                <text text="夜间休息时间,从" gravity="left" textSize="12sp" />
+                <input id="yjxx1" gravity="left" text={storage.get("yjxx1",[2])}  textSize="15sp" textSizeHint = "15sp"/>
+                <text text="点开始到" gravity="left" textSize="12sp" />
+                <input id="yjxx2" gravity="left" text ={storage.get("yjxx2",[6])}  textSize="15sp" textSizeHint = "15sp"/>
+                <text text="点结束" gravity="left" textSize="12sp"/>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent"    margin="5 5">
+                <Switch id="tdsd" checked ={storage.get("tdsd",[false])}/>
+                <text text="从" gravity="left" textSize="12sp" />
+                <input id="tdsd1" gravity="left" text={storage.get("tdsd1",[14])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text="点到" gravity="left" textSize="12sp" />
+                <input id="tdsd2" gravity="left" text ={storage.get("tdsd2",[18])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text="点时间段内只运行" gravity="left" textSize="12sp"/>
+                <spinner id="tdsdxz" entries={平台选择} textSize="10sp" textColor="#F68D06"  gravity="left"/>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent"  margin="5 5">
+                <Switch id="dsdt2" checked ={storage.get("dsdt2",[false])}/>
+                <text text="从" gravity="left" textSize="12sp" />
+                <input id="dsdt11" gravity="left" text={storage.get("dsdt11",[14])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text="点到" gravity="left" textSize="12sp" />
+                <input id="dsdt22" gravity="left" text ={storage.get("dsdt22",[18])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text="点时间段内只运行" gravity="left" textSize="12sp"/>
+                <spinner id="dsdt2xz" entries={平台选择} textSize="10sp" textColor="#F68D06"  gravity="left"/>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal gravity="center_horizontal" margin="0 5">
+                <text bg="#f2f2f2" w="1" h="40" text=" "/>
+                <button id="一键勾选" text="一键勾选或取消" h="40" w="70" textSize="8sp" padding="0 2" margin="2 0" textColor="#FFFFFF" bg="{{my_color}}" style="Widget.AppCompat.Button.Borderless.Colored"/>
+                <text bg="#f2f2f2" w="1" h="40" text=" "/>
+                <button id="多开下载" text="双开助手"  h="40" w="50" textSize="8sp" padding="0 2" margin="2 0" textColor="#FFFFFF" bg="{{my_color}}" style="Widget.AppCompat.Button.Borderless.Colored"/>
+                <text bg="#f2f2f2" w="1" h="40" text=" "/>
+                <button id="应用宝下载" text="应用宝"  h="40" w="40" textSize="8sp" padding="0 2" margin="2 0" textColor="#FFFFFF" bg="{{my_color}}" style="Widget.AppCompat.Button.Borderless.Colored"/>
+                <text bg="#f2f2f2" w="1" h="40" text=" "/>
+                <button id="Download一键下载" text="一键下载/更新" h="40" w="0" textSize="8sp" padding="0 2" margin="2 0" textColor="#FFFFFF" bg="{{my_color}}" style="Widget.AppCompat.Button.Borderless.Colored"/>
+                <text bg="#f2f2f2" w="1" h="40" text=" "/>
+                <button id="猎豹清理" text="猎豹清理" h="40" w="50" textSize="8sp" padding="0 2" margin="2 0" textColor="#FFFFFF" bg="{{my_color}}" style="Widget.AppCompat.Button.Borderless.Colored"/>
+                <text bg="#f2f2f2" w="1" h="40" text=" "/>
+              </horizontal>
+            </vertical>
+          </ScrollView>
+        </card>
+      </frame>
+      <frame>
+        <card id="card2" w="*" h="*" margin="10 5" cardCornerRadius="2dp" cardElevation="1dp" foreground="?selectableItemBackground">
+          <ScrollView layout_width="match_parent"  layout_gravity="center">
+            <vertical>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="jkd" checked ={storage.get("jkd",[false])} h="60"/>
+                <text text="1.聚看点" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="文章" gravity="left" textSize="12" />
+                <input id="jkd1" gravity="left" text={storage.get("jkd1",[150])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text="视频" gravity="left" textSize="12" />
+                <input id="jkd2" gravity="left" text={storage.get("jkd2",[0])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff" textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "jkdbb" textSize="10" lines="1" width="30"/>
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download1" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="wlkk" checked ={storage.get("wlkk",[false])}  h="60"/>
+                <text text="2.微鲤" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="文章" gravity="left" textSize="12" />
+                <input id="wlkk1" gravity="left" text={storage.get("wlkk1",[100])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text="  小视频" gravity="left" textSize="12" />
+                <input id="wlkk2" gravity="left" text={storage.get("wlkk2",[10])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff" textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "wlkkbb" textSize="10" lines="1" width="30"/>
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download2" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="sb" checked ={storage.get("sb",[false])}  h="60" visibility="{{this.checkable ? 'visible' : 'gone'}}"/>
+                <text text="3.刷宝" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="视频" gravity="left" textSize="12" />
+                <input id="sb2" gravity="left" text={storage.get("sb2",[50])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff" textSize="10"/>
+                <text text="" gravity="left" textColor="#4fb3ff" id = "sbbb" textSize="10" />
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download4" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="bbsp" checked ={storage.get("bbsp",[false])} h="60"/>
+                <text text="4.波波视频" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="视频" gravity="left" textSize="12" />
+                <input id="bbsp2" gravity="left" text={storage.get("bbsp2",[90])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "bbspbb"textSize="10" />
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download5" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="qls" checked ={storage.get("qls",[false])}  h="60"/>
+                <text text="5.趣铃声" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="视频" gravity="left" textSize="12" />
+                <input id="qls2" gravity="left" text={storage.get("qls2",[200])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "qlsbb"textSize="10" lines="1" width="30"/>
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download6" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="sdhz" checked ={storage.get("sdhz",[false])}  h="60"/>
+                <text text="6.闪电盒子" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="文章" gravity="left" textSize="12" />
+                <input id="sdhz1" gravity="left" text={storage.get("sdhz1",[70])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text="  购物" gravity="left" textSize="12" />
+                <input id="sdhz2" gravity="left" text={storage.get("sdhz2",[40])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "sdhzbb"textSize="10" lines="1" width="30"/>
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download7" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent" h="0" w="0">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="kqllq" checked ="false"  h="60"/>
+                <text text="8.快7浏览器" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="视频" gravity="left" textSize="12" />
+                <input id="kqllq2" gravity="left" text={storage.get("kqllq2",[300])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "kqllqbb"textSize="10" />
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download11" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="hbhz" checked ={storage.get("hbhz",[false])}  h="60"/>
+                <text text="9.红包盒子" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="文章" gravity="left" textSize="12" />
+                <input id="hbhz1" gravity="left" text={storage.get("hbhz1",[40])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text="视频" gravity="left" textSize="12" />
+                <input id="hbhz2" gravity="left" text={storage.get("hbhz2",[20])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "hbhzbb"textSize="10" lines="1" width="30"/>
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download13" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="hs" checked ={storage.get("hs",[false])}  h="60"/>
+                <text text="10.火山极速版" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="视频" gravity="left" textSize="12" />
+                <input id="hs2" gravity="left" text={storage.get("hs2",[150])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "hsbb"textSize="10" />
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download14" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="ks" checked ={storage.get("ks",[false])}  h="60"/>
+                <text text="11.快手极速版" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="视频" gravity="left" textSize="12" />
+                <input id="ks2" gravity="left" text={storage.get("ks2",[350])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "ksbb"textSize="10" />
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download15" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="xk" checked ={storage.get("xk",[false])}  h="60"/>
+                <text text="12.想看" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="文章" gravity="left" textSize="12" />
+                <input id="xk1" gravity="left" text={storage.get("xk1",[140])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text="视频" gravity="left" textSize="12" />
+                <input id="xk2" gravity="left" text={storage.get("xk2",[50])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "xkbb"textSize="10" />
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download16" h="28" w="28" marginRight="10" layout_gravity="right" style="Widget.AppCompat.Button.Borderless.Colored" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="kkd" checked ={storage.get("kkd",[false])}  h="60"/>
+                <text text="13.快看点" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="文章" gravity="left" textSize="12" />
+                <input id="kkd1" gravity="left" text={storage.get("kkd1",[160])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text="视频" gravity="left" textSize="12" />
+                <input id="kkd2" gravity="left" text={storage.get("kkd2",[0])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "kkdbb"textSize="10" />
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download17" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="dy" checked ={storage.get("dy",[false])}  h="60"/>
+                <text text="14.抖音极速版" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="视频" gravity="left" textSize="12" />
+                <input id="dy2" gravity="left" text={storage.get("dy2",[150])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "dybb"textSize="10" />
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download21" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="qtt" checked ={storage.get("qtt",[false])}  h="60"/>
+                <text text="15.趣头条" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="文章" gravity="left" textSize="12" />
+                <input id="qtt1" gravity="left" text={storage.get("qtt1",[60])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text="小视频" gravity="left" textSize="12" />
+                <input id="qtt2" gravity="left" text={storage.get("qtt2",[30])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "qttbb"textSize="10" lines="1" width="30"/>
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download22" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="ddxw" checked ={storage.get("ddxw",[false])}  h="60"/>
+                <text text="16.点点新闻" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="文章" gravity="left" textSize="12" />
+                <input id="ddxw1" gravity="left" text={storage.get("ddxw1",[35])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text="视频" gravity="left" textSize="12" />
+                <input id="ddxw2" gravity="left" text={storage.get("ddxw2",[5])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "ddxwbb"textSize="10" lines="1" width="30"/>
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download23" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="ylkk" checked ={storage.get("ylkk",[false])}  h="60"/>
+                <text text="17.有料看看" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="文章" gravity="left" textSize="12" />
+                <input id="ylkk1" gravity="left" text={storage.get("ylkk1",[90])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text="视频" gravity="left" textSize="12" />
+                <input id="ylkk2" gravity="left" text={storage.get("ylkk2",[0])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "ylkkbb"textSize="10" lines="1" width="30"/>
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download24" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="cdsp" checked ={storage.get("cdsp",[false])}  h="60"/>
+                <text text="18.彩蛋视频" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="视频" gravity="left" textSize="12" />
+                <input id="cdsp2" gravity="left" text={storage.get("cdsp2",[200])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "cdspbb"textSize="10" />
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download25" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="hhspjsb" checked ={storage.get("hhspjsb",[false])}  h="60"/>
+                <text text="19.火火视频极速版" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="视频" gravity="left" textSize="12" />
+                <input id="hhspjsb2" gravity="left" text={storage.get("hhspjsb2",[100])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "hhspjsbbb"textSize="10" lines="1" width="30"/>
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download26" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent"  h="0">
+                <horizontal layout_width="match_parent" gravity="right">
+                  <text text="不看广告(请勿随便勾选)"  gravity="center" textSize="8"/>
+                  <Switch id="bkgg"  gravity="center" checked ={storage.get("bkgg",[false])}  h="60"/>
+                </horizontal>
+              </horizontal>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="jdjsb" checked ={storage.get("jdjsb",[false])}  h="60"/>
+                <text text="20.京东极速版" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="视频" gravity="left" textSize="12" />
+                <input id="jdjsb2" gravity="left" text={storage.get("jdjsb2",[120])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "jdjsbbb"textSize="10" lines="1" width="40"/>
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download27" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="zqxsp" checked ={storage.get("zqxsp",[false])}  h="60"/>
+                <text text="22.赚钱小视频" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="视频" gravity="left" textSize="12" />
+                <input id="zqxsp2" gravity="left" text={storage.get("zqxsp2",[150])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "zqxspbb"textSize="10" lines="1" width="40"/>
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download29" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="mtzd" checked ={storage.get("mtzd",[false])}  h="60"/>
+                <text text="23.每天赚点" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="视频" gravity="left" textSize="12" />
+                <input id="mtzd2" gravity="left" text={storage.get("mtzd2",[80])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "mtzdbb"textSize="10" />
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download31" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="ttaql" checked ={storage.get("ttaql",[false])}  h="60"/>
+                <text text="24.天天爱清理" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="视频" gravity="left" textSize="12" />
+                <input id="ttaql2" gravity="left" text={storage.get("ttaql2",[300])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "ttaqlbb"textSize="10" lines="1" width="40"/>
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download36" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="xzzq" checked ={storage.get("xzzq",[false])}  h="60"/>
+                <text text="25.小啄赚钱" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="视频" gravity="left" textSize="12" />
+                <input id="xzzq2" gravity="left" text={storage.get("xzzq2",[260])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "xzzqbb"textSize="10" lines="1" width="40"/>
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download42" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="ykjsb" checked ={storage.get("ykjsb",[false])}  h="60"/>
+                <text text="26.映客极速版" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="直播" gravity="left" textSize="12" />
+                <input id="ykjsb2" gravity="left" text={storage.get("ykjsb2",[35])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "ykjsbbb"textSize="10" lines="1" width="40"/>
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img id="Download43" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="ddtt" checked ={storage.get("ddtt",[false])}  h="60"/>
+                <text text="27.点点头条" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="视频" gravity="left" textSize="12" />
+                <input id="ddtt2" gravity="left" text={storage.get("ddtt2",[300])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "ddttbb"textSize="10" lines="1" width="40"/>
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download44" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="ky" checked ={storage.get("ky",[false])}  h="60"/>
+                <text text="28.快音" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="视频" gravity="left" textSize="12" />
+                <input id="ky2" gravity="left" text={storage.get("ky2",[100])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "kybb"textSize="10" />
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download45" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="asjz" checked ={storage.get("asjz",[false])}  h="60"/>
+                <text text="29.爱上兼职" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="视频" gravity="left" textSize="12" />
+                <input id="asjz2" gravity="left" text={storage.get("asjz2",[80])} textSize="12sp" textSizeHint = "12sp"/>
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download48" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent" h="0">
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "asjzbb"textSize="10" />
+                <horizontal layout_width="match_parent" gravity="right">
+                  <text text="不看广告(请勿随便勾选)"  gravity="center" textSize="8"/>
+                  <Switch id="bkgg2"  gravity="center" checked ={storage.get("bkgg2",[false])}  h="60"/>
+                </horizontal>
+              </horizontal>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="wlkd" checked ={storage.get("wlkd",[false])}  h="60"/>
+                <text text="30.文旅看点" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="文章" gravity="left" textSize="12" />
+                <input id="wlkd1" gravity="left" text={storage.get("wlkd1",[130])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text="视频" gravity="left" textSize="12" />
+                <input id="wlkd2" gravity="left" text={storage.get("wlkd2",[0])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "wlkdbb"textSize="10" lines="1" width="30"/>
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download59" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="lzls" checked ={storage.get("lzls",[false])}  h="60"/>
+                <text text="31.荔枝铃声" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="视频" gravity="left" textSize="12" />
+                <input id="lzls2" gravity="left" text={storage.get("lzls2",[200])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "lzlsbb"textSize="10" />
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download62" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="zksp" checked ={storage.get("zksp",[false])}  h="60"/>
+                <text text="32.追看视频" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="视频" gravity="left" textSize="12" />
+                <input id="zksp2" gravity="left" text={storage.get("zksp2",[200])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "zkspbb"textSize="10" />
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download63" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="mykd" checked ={storage.get("mykd",[false])}  h="60"/>
+                <text text="33.蚂蚁看点" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="文章" gravity="left" textSize="12" />
+                <input id="mykd1" gravity="left" text={storage.get("mykd1",[80])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text="小视频" gravity="left" textSize="12" />
+                <input id="mykd2" gravity="left" text={storage.get("mykd2",[15])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "mykdbb"textSize="10" lines="1" width="30"/>
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download64" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="xch" checked ={storage.get("xch",[false])}  h="60"/>
+                <text text="34.小吃货短视频" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="时长" gravity="left" textSize="12" />
+                <input id="xch1" gravity="left" text={storage.get("xch1",[30])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text="分钟" gravity="left" textSize="10" />
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "xchbb"textSize="10" lines="1" width="30"/>
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download76" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="yydsp" checked ={storage.get("yydsp",[false])}  h="60"/>
+                <text text="35.有颜短视频" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="时长" gravity="left" textSize="12" />
+                <input id="yydsp1" gravity="left" text={storage.get("yydsp1",[30])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text="分钟" gravity="left" textSize="10" />
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "yydspbb"textSize="10" lines="1" width="30"/>
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download77" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="bxtt" checked ={storage.get("bxtt",[false])}  h="60"/>
+                <text text="36.百姓头条" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="时长" gravity="left" textSize="12" />
+                <input id="bxtt1" gravity="left" text={storage.get("bxtt1",[30])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text="分钟" gravity="left" textSize="10" />
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "bxttbb"textSize="10" lines="1" width="30"/>
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download78" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="zqkd" checked ={storage.get("zqkd",[false])}  h="60"/>
+                <text text="37.中青看点" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="文章" gravity="left" textSize="12" />
+                <input id="zqkd1" gravity="left" text={storage.get("zqkd1",[60])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text="视频" gravity="left" textSize="12" />
+                <input id="zqkd2" gravity="left" text={storage.get("zqkd2",[30])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "zqkdbb"textSize="10" lines="1" width="30"/>
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download79" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="tangdou" checked ={storage.get("tangdou",[false])}  h="60"/>
+                <text text="38.糖豆" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="时长" gravity="left" textSize="12" />
+                <input id="tangdou1" gravity="left" text={storage.get("tangdou1",[30])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text="分钟" gravity="left" textSize="10" />
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "tangdoubb"textSize="10" lines="1" width="30"/>
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download80" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="ttdsp" checked ={storage.get("ttdsp",[false])}  h="60"/>
+                <text text="40.天天短视频" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="时长" gravity="left" textSize="12" />
+                <input id="ttdsp1" gravity="left" text={storage.get("ttdsp1",[30])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text="分钟" gravity="left" textSize="10" />
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "ttdspbb"textSize="10" lines="1" width="30"/>
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download82" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="qktx" checked ={storage.get("qktx",[false])}  h="60"/>
+                <text text="41.趣看天下" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="时长" gravity="left" textSize="12" />
+                <input id="qktx1" gravity="left" text={storage.get("qktx1",[30])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text="分钟" gravity="left" textSize="10" />
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "qktxbb"textSize="10" lines="1" width="30"/>
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download83" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="weishi" checked ={storage.get("weishi",[false])}  h="60"/>
+                <text text="42.微视" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="时长" gravity="left" textSize="12" />
+                <input id="weishi1" gravity="left" text={storage.get("weishi1",[30])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text="分钟" gravity="left" textSize="10" />
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "weishibb"textSize="10" lines="1" width="30"/>
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download84" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="changchu" checked ={storage.get("changchu",[false])}  h="60"/>
+                <text text="43.畅初小说" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="时长" gravity="left" textSize="12" />
+                <input id="changchu1" gravity="left" text={storage.get("changchu1",[30])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text="分钟" gravity="left" textSize="10" />
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "changchubb"textSize="10" lines="1" width="30"/>
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download88" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+            </vertical>
+          </ScrollView>
+        </card>
+      </frame>
+      <frame>
+        <card id="card3" w="*" h="*" margin="10 5" cardCornerRadius="2dp" cardElevation="1dp" foreground="?selectableItemBackground">
+          <ScrollView layout_width="match_parent"  layout_gravity="center">
+            <vertical>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="0" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="pddhb" checked ={storage.get("pddhb",[false])}  h="60"/>
+                <text text="1.拼多多" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="运行时长" gravity="left" textSize="12" />
+                <input id="pddhb1" gravity="left" text={storage.get("pddhb1",[2])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text="小时 版本号:" gravity="left" textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "pddhbbb" textSize="10" />
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download73" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" " id="pddhbfg"/>
+              <scroll padding="0" h="auto"  bg="{{my_color}}" id="pddhbsz">
+                <vertical marginLeft="10"  h="650" bg="#ffffff">
+                  <card w="*" h="auto"
+                                  cardElevation="2dp" gravity="center_vertical" marginBottom="5dp" >
+                    <vertical >
+                      <View bg="#F3F3F3" h="2" w="*"/>
+                      <text w="*" h="30" text="全局设置" textSize="12sp" textStyle="bold" bg="#ffffff" textColor="#666666" padding="15 5" gravity="center" layout_gravity="right|center" />
+                      <View bg="#F3F3F3" h="2" w="*"/>
+                      <vertical padding="8 0">
+                        <horizontal>
+                          <checkbox id="拼多多红包时间限制" checked={本地存储.get("拼多多红包时间限制",true)} text="多币红包时间限制:" textColor="#000000" textSize="12sp" />
+                          <input id="拼多多红包上限时间" text={本地存储.get("拼多多红包上限时间",180)} textSize="12sp" textColorHint="#4F4F4F" inputType="number" />
+                          <text text="秒" textColor="#000000" textSize="12sp" />
+                          <text text="等待超时则跳过(选填)" textColor="#4F4F4F" textSize="10sp" marginLeft="10" />
+                        </horizontal>
+                      </vertical>
+                    </vertical>
+                  </card>
+                </vertical>
+              </scroll>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="dyhb" checked ={storage.get("dyhb",[false])}  h="60"/>
+                <text text="2.抖音红包" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="运行时长" gravity="left" textSize="12" />
+                <input id="dyhb1" gravity="left" text={storage.get("dyhb1",[2])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text="小时 版本号:" gravity="left" textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "dyhbbb" textSize="10" />
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download_dy" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <scroll padding="0" h="auto"  bg="{{my_color}}" id="dyhbsz">
+                <vertical marginLeft="10"  h="650" bg="#ffffff">
+                  <card w="*" h="auto"
+                                  cardElevation="2dp" gravity="center_vertical">
+                    <vertical >
+                      <View bg="#F3F3F3" h="2" w="*"/>
+                      <text w="*" h="30" text="全局设置" textSize="12sp" textStyle="bold" bg="#ffffff" textColor="#666666" padding="15 5" gravity="center" layout_gravity="right|center" />
+                      <View bg="#F3F3F3" h="2" w="*"/>
+                      <vertical padding="8 0">
+                        <horizontal>
+                          <checkbox id="抖音是否抢红包" checked={本地存储.get("抖音是否抢红包",true)} textColor="#000000" textSize="12sp" />
+                          <text text="红包:" textColor="#000000" textSize="12sp" />
+                          <checkbox id="抖音红包时间限制" textColor="#000000" textSize="12sp" checked="true" w="0" h="0"/>
+                          <input id="抖音红包最大等待时长" text={本地存储.get("抖音红包最大等待时长",120)} textSize="12sp" textColorHint="#4F4F4F" inputType="number" />
+                          <text text="秒" textColor="#000000" textSize="12sp" />
+                          <text text="等待超时则跳过(必填)" textColor="#4F4F4F" textSize="10sp" marginLeft="10" />
+                        </horizontal>
+                        <horizontal>
+                          <checkbox id="抖音是否抢福袋" checked={本地存储.get("抖音是否抢福袋",true)} textColor="#000000" textSize="12sp" />
+                          <text text="福袋:" textColor="#000000" textSize="12sp" />
+                          <checkbox id="抖音福袋时间限制" textColor="#000000" textSize="12sp" checked="true" w="0" h="0"/>
+                          <input id="抖音福袋最大等待时长" text={本地存储.get("抖音福袋最大等待时长",300)} textSize="12sp" textColorHint="#4F4F4F" inputType="number" />
+                          <text text="秒" textColor="#000000" textSize="12sp" />
+                          <text text="等待超时则跳过(必填)" textColor="#4F4F4F" textSize="10sp" marginLeft="10" />
+                        </horizontal>
+                        <horizontal>
+                          <checkbox id="抖音狂暴模式" checked={本地存储.get("抖音狂暴模式",true)} textColor="#000000" textSize="12sp" />
+                          <text text="极速模式" textColor="#000000" textSize="12sp" />
+                          <checkbox id="抖音付费福袋" checked={本地存储.get("抖音付费福袋",false)} textColor="#000000" textSize="12sp" />
+                          <text text="参与付费福袋" textColor="#000000" textSize="12sp" />
+                          <text text="付费福袋需支付1抖币" textColor="#4F4F4F" textSize="10sp" marginLeft="10" />
+                        </horizontal>
+                      </vertical>
+                    </vertical>
+                  </card>
+                </vertical>
+              </scroll>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="jrtthb" checked ={storage.get("jrtthb",[false])}  h="60"/>
+                <text text="3.今日头条" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="单号时长" gravity="left" textSize="12" />
+                <input id="jrtthb1" gravity="left" text={storage.get("jrtthb1",[3])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text="小时 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "jrttbb"textSize="10" />
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download74" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" " id="jrttfg"/>
+              <scroll padding="0" h="auto"  bg="{{my_color}}" id="jrttsz">
+                <vertical marginLeft="10"  h="650" bg="#ffffff">
+                  <card w="*" h="auto"
+                                  cardElevation="2dp" gravity="center_vertical" marginBottom="5dp">
+                    <vertical >
+                      <View bg="#F3F3F3" h="2" w="*"/>
+                      <Switch w="*" h="30"  id="抢红包" text="                《红包》" textSize="12sp" textStyle="bold" bg="#ffffff" textColor="#666666" checked={storage.get("抢红包",[true])}  padding="15 5" gravity="center" layout_gravity="right|center" />
+                      <View bg="#F3F3F3" h="2" w="*"/>
+                      <vertical padding="8 0"  >
+                        <horizontal gravity="left">
+                          <text text="等待开奖时间" textColor="#000000" textSize="12sp" />
+                          <input id="红包上限sj" text={本地存储.get("红包上限sj","120")} textSize="12sp" textColorHint="#4F4F4F" inputType="number" />
+                          <text text="秒" textColor="#000000" textSize="12sp" />
+                          <text text="红包等待时间限制(选填)" textColor="#4F4F4F" textSize="10sp" marginLeft="10" />
+                        </horizontal>
+                        <horizontal>
+                          <text text="找寻红包时间:" textColor="#000000" textSize="12sp" />
+                          <input id="找寻红包sj" text={本地存储.get("找寻红包sj",4)} textSize="12sp" textColorHint="#4F4F4F" inputType="number" />
+                          <text text="秒" textColor="#000000" textSize="12sp" />
+                          <text text="直播寻找红包时间(如无必要默认即可)" textColor="#4F4F4F" textSize="10sp" marginLeft="10" />
+                        </horizontal>
+                      </vertical>
+                      <View bg="#F3F3F3" h="2" w="*"/>
+                      <Switch w="*" h="30"  id="参与福袋" text="                《福袋》" textSize="12sp" textStyle="bold" bg="#ffffff" checked={storage.get("参与福袋",[true])} textColor="#666666" padding="15 5" gravity="center" layout_gravity="right|center" />
+                      <View bg="#F3F3F3" h="2" w="*"/>
+                      <vertical padding="8 0"  >
+                        <horizontal>
+                          <checkbox id="参与收费福袋" text="参与收费福袋" checked="false" h="0" textColor="#000000" textSize="12sp" />
+                          <text text="福袋只参与免费的,收费则不参与(必选)" textColor="#4F4F4F" textSize="10sp" />
+                        </horizontal>
+                        <horizontal>
+                          <checkbox id="快速寻找" text="是否快速寻找" checked={本地存储.get("快速寻找",[false])} textColor="#000000" textSize="12sp" />
+                          <text text="(夜间福袋较少,可以选择快速寻找)" textColor="#4F4F4F" textSize="10sp" marginLeft="10" />
+                        </horizontal>
+                        <horizontal>
+                          <text text="福袋上限时间:" textColor="#000000" textSize="12sp" />
+                          <input id="福袋上限sj" text={本地存储.get("福袋上限sj",[240])} textSize="12sp" textColorHint="#4F4F4F" inputType="number" />
+                          <text text="秒" textColor="#000000" textSize="12sp" />
+                          <text text="福袋等待时间限制(选填)" textColor="#4F4F4F" textSize="10sp" marginLeft="10" />
+                        </horizontal>
+                        <horizontal>
+                          <text text="找福袋时间:" textColor="#000000" textSize="12sp" />
+                          <input id="找寻福袋sj" text={本地存储.get("找寻福袋sj",[4])} textSize="12sp" textColorHint="#4F4F4F" inputType="number" />
+                          <text text="秒" textColor="#000000" textSize="12sp" />
+                          <text text="直播寻找福袋时间(如无必要默认即可)" textColor="#4F4F4F" textSize="10sp" marginLeft="10" />
+                        </horizontal>
+                      </vertical>
+                      <View bg="#F3F3F3" h="2" w="*"/>
+                      <Switch w="*" h="30"  id="头条是否多开模式" text="                《是否多开》" textSize="12sp" textStyle="bold" bg="#ffffff" checked={storage.get("头条是否多开模式",[false])} textColor="#666666" padding="15 5" gravity="center" layout_gravity="right|center" />
+                      <View bg="#F3F3F3" h="2" w="*"/>
+                    </vertical>
+                  </card>
+                </vertical>
+              </scroll>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="yingke" checked ={本地存储.get("yingke",[false])}  h="60"/>
+                <text text="3.映客直播" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="单号时长" gravity="left" textSize="12" />
+                <input id="yingke1" gravity="left" text={本地存储.get("yingke1",[3])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text="小时 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "yingkebb"textSize="10" />
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download87" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="fqmfxs" checked ={storage.get("fqmfxs",[false])}  h="60"/>
+                <text text="4.番茄免费小说" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="进入次数" gravity="left" textSize="12" />
+                <input id="fqmfxs1" gravity="left" text={storage.get("fqmfxs1",[2])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "fqmfxsbb"textSize="10" lines="1" width="30"/>
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download46" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent" h="0">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="tys" checked ="false"  h="60"/>
+                <text text="5.淘元素" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="进入次数" gravity="left" textSize="12" />
+                <input id="tys1" gravity="left" text={storage.get("tys1",[2])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "tysbb"textSize="10" />
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download52" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="kgyydzb" checked ={storage.get("kgyydzb",[false])}  h="60"/>
+                <text text="5.酷狗音乐大字版" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="进入次数" gravity="left" textSize="12" />
+                <input id="kgyydzb2" gravity="left" text={storage.get("kgyydzb2",[1])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "kgyydzbbb"textSize="10" />
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download53" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent" h="0">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="lz" checked ="false"  h="60"/>
+                <text text="7.绿洲" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="进入次数" gravity="left" textSize="12" />
+                <input id="lz2" gravity="left" text={storage.get("lz2",[2])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "lzbb"textSize="10" />
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download57" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="kgeg" checked ={storage.get("kgeg",[false])}  h="60"/>
+                <text text="6.酷狗儿歌" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="进入次数" gravity="left" textSize="12" />
+                <input id="kgeg2" gravity="left" text={storage.get("kgeg2",[1])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "kgegbb"textSize="10" lines="1" width="40"/>
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download65" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="bsxq" checked ={storage.get("bsxq",[false])}  h="60"/>
+                <text text="7.宝石星球" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="进入次数" gravity="left" textSize="12" />
+                <input id="bsxq2" gravity="left" text={storage.get("bsxq2",[2])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "bsxqbb"textSize="10" lines="1" width="40"/>
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download67" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="ysm" checked ={storage.get("ysm",[false])}  h="60"/>
+                <text text="8.云扫码" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="文章" gravity="left" textSize="12" />
+                <text text="(微信文章)" gravity="left" textSize="11" />
+                <input id="ysm2" gravity="left" text={storage.get("ysm2",[50])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "ysmbb"textSize="10" />
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="8">
+                  <button id="Download66" bg="{{my_color}}" color="#ffffff" text="复制" h="40" w="50" textSize="10sp" gravity="center"/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="ddgl" checked ={storage.get("ddgl",[false])}  h="60"/>
+                <text text="9.多多果林" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="进入次数" gravity="left" textSize="12" />
+                <input id="ddgl2" gravity="left" text={storage.get("ddgl2",[2])} textSize="12sp" textSizeHint = "12sp"/>
+                <text id="ddglyq" text="邀请码" gravity="left" textSize="12" />
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "ddglbb"textSize="10" lines="1" width="30"/>
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download71" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent" h="0">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="hz" checked ="false"  h="60"/>
+                <text text="11.花赚" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="进入次数" gravity="left" textSize="12" />
+                <input id="hz2" gravity="left" text={storage.get("hz2",[2])} textSize="12sp" textSizeHint = "12sp"/>
+                <text  id="hzyq" text="邀请码" gravity="left" textSize="12" />
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "hzbb"textSize="10" lines="1" width="30"/>
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download72" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="myb" checked ="false"  h="60"/>
+                <text text="12.蚂蚁帮" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="文章" gravity="left" textSize="12" />
+                <text text="(微信文章)" gravity="left" textSize="11" />
+                <input id="myb2" gravity="left" text={storage.get("myb2",[60])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "mybbb"textSize="10" />
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download68" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+            </vertical>
+          </ScrollView>
+        </card>
+      </frame>
+      <frame>
+        <card id="card4" w="*" h="*" margin="10 5" cardCornerRadius="2dp" cardElevation="1dp" foreground="?selectableItemBackground">
+          <ScrollView layout_width="match_parent"  layout_gravity="center">
+            <vertical>
+              <horizontal gravity="center_vertical">
+                <Switch id="run94" checked ={storage.get("run94",[false])}  h="auto"  gravity="left"/>
+                <text text=                         {name_rw} gravity="center" textSize="14" textColor = "#f2c900" />
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal gravity="center_vertical">
+                <vertical padding="10 8" h="auto" w="0" layout_weight="1" >
+                  <linear>
+                    <checkbox id="doDyFocus" checked="{{config.doDyFocus == true}}" text="斗士关注" textSize="12sp"/>
+                    <checkbox id="doDyLike" checked="{{config.doDyLike == true}}" text="斗士点赞" textSize="12sp"/>
+                    <checkbox id="DyAutoChange" checked="{{config.DyAutoChange == true}}" text="斗士自动换号" textSize="12sp"/>
+                  </linear>
+                  <linear>
+                    <checkbox id="doQDyFocus" checked="{{config.doQDyFocus == true}}" text="斗士极速版关注" textSize="12sp"/>
+                    <checkbox id="doQDyLike" checked="{{config.doQDyLike == true}}" text="斗士极速版点赞" textSize="12sp"/>
+                  </linear>
+                  <linear>
+                    <checkbox id="doHsFocus" checked="{{config.doHsFocus == true}}" text="伙士关注" textSize="12sp"/>
+                    <checkbox id="doHsLike" checked="{{config.doHsLike == true}}" text="伙士点赞" textSize="12sp"/>
+                    <checkbox id="HsAutoChange" checked="{{config.HsAutoChange == true}}" text="伙士自动换号" textSize="12sp"/>
+                  </linear>
+                  <linear>
+                    <checkbox id="doKsFocus" checked="{{config.doKsFocus == true}}" text="筷子关注" textSize="12sp"/>
+                  </linear>
+                  <linear gravity="center">
+                    <button text="邀请码" id="copy_yqm"  style="Widget.AppCompat.Button.Colored" w="auto" textColor="#FFFFFF" textSize="10sp"/>
+                    <button id="showTaskSetting" text="显示设置" style="Widget.AppCompat.Button.Colored" w="auto" textColor="#FFFFFF" textSize="10sp"/>
+                    <button id="wandoujiadown" text="豌豆荚" style="Widget.AppCompat.Button.Colored" w="auto" textColor="#FFFFFF" textSize="10sp" />
+                    <button text="清理" id="removecookie"  style="Widget.AppCompat.Button.Colored" w="auto" textColor="#FFFFFF" textSize="10sp"/>
+                  </linear>
+                  <button text="" id="login94"  style="Widget.AppCompat.Button.Colored" w="*"/>
+                  <vertical>
+                    <horizontal>
+                      <webview id="web" margin="10 10 10 10" />
+                    </horizontal>
+                  </vertical>
+                </vertical>
+              </horizontal>
+              <card id="taskSetting" w="*" h="auto" margin="5 5" cardCornerRadius="2dp"
+                              cardElevation="1dp" foreground="?selectableItemBackground">
+                <horizontal gravity="center_vertical">
+                  <vertical padding="10 8" h="auto" w="0" layout_weight="1">
+                    <RadioGroup id="taskMode" >
+                      <RadioButton id="stableMode" checked="{{config.quickTask == 0}}" text="稳定模式"  />
+                      <RadioButton id="midmode" checked="{{config.quickTask == 1}}" text="中速模式"   />
+                      <RadioButton id="quickMod" checked="{{config.quickTask == 2}}" text="快速模式"   />
+                      <RadioButton id="searchMod" checked="{{config.quickTask == 3}}" text="搜索模式"  />
+                    </RadioGroup>
+                    <linear>
+                      <checkbox id="bringBefore" checked="{{config.bringBefore == true}}" text="开始前养号" />
+                      <checkbox id="bringOngoing" checked="{{config.bringOngoing == true}}" text="任务中养号" />
+                      <checkbox id="debug" checked="{{config.debug == true}}" text="调试日志" />
+                    </linear>
+                    <horizontal>
+                      <text textSize="{{TEXT_SIZE}}" textColor="{{TEXT_COLOR}}" text="任务前:视频" />
+                      <input id="beforeVideoNum1" w="auto" minWidth="40" textColor="{{INPUT_TEXT_COLOR}}" text="{{config.beforeVideoNum1}}" hint="{{default_conf.beforeVideoNum1}}" />
+                      <text textSize="{{TEXT_SIZE}}" textColor="{{TEXT_COLOR}}" text="到" />
+                      <input id="beforeVideoNum2" w="auto" minWidth="40" textColor="{{INPUT_TEXT_COLOR}}" text="{{config.beforeVideoNum2}}" hint="{{default_conf.beforeVideoNum2}}" />
+                      <text textSize="{{TEXT_SIZE}}" textColor="{{TEXT_COLOR}}" text="个" />
+                      <text textSize="{{TEXT_SIZE}}" textColor="{{TEXT_COLOR}}" text=" 观看" />
+                      <input id="beforeVideoTime1" w="auto" minWidth="40" textColor="{{INPUT_TEXT_COLOR}}" text="{{config.beforeVideoTime1}}" hint="{{default_conf.beforeVideoTime1}}" />
+                      <text textSize="{{TEXT_SIZE}}" textColor="{{TEXT_COLOR}}" text="到" />
+                      <input id="beforeVideoTime2" w="auto" minWidth="40" textColor="{{INPUT_TEXT_COLOR}}" text="{{config.beforeVideoTime2}}" hint="{{default_conf.beforeVideoTime2}}" />
+                      <text textSize="{{TEXT_SIZE}}" textColor="{{TEXT_COLOR}}" text="秒" />
+                    </horizontal>
+                    <horizontal>
+                      <text textSize="{{TEXT_SIZE}}" textColor="{{TEXT_COLOR}}" text="任务中:视频" />
+                      <input id="ongoingVideoNum1" w="auto" minWidth="40" textColor="{{INPUT_TEXT_COLOR}}" text="{{config.ongoingVideoNum1}}" hint="{{default_conf.ongoingVideoNum1}}" />
+                      <text textSize="{{TEXT_SIZE}}" textColor="{{TEXT_COLOR}}" text="到" />
+                      <input id="ongoingVideoNum2" w="auto" minWidth="40" textColor="{{INPUT_TEXT_COLOR}}" text="{{config.ongoingVideoNum2}}" hint="{{default_conf.ongoingVideoNum2}}" />
+                      <text textSize="{{TEXT_SIZE}}" textColor="{{TEXT_COLOR}}" text="个" />
+                      <text textSize="{{TEXT_SIZE}}" textColor="{{TEXT_COLOR}}" text=" 观看" />
+                      <input id="ongoingVideoTime1" w="auto" minWidth="40" textColor="{{INPUT_TEXT_COLOR}}" text="{{config.ongoingVideoTime1}}" hint="{{default_conf.ongoingVideoTime1}}" />
+                      <text textSize="{{TEXT_SIZE}}" textColor="{{TEXT_COLOR}}" text="到" />
+                      <input id="ongoingVideoTime2" w="auto" minWidth="40" textColor="{{INPUT_TEXT_COLOR}}" text="{{config.ongoingVideoTime2}}" hint="{{default_conf.ongoingVideoTime2}}" />
+                      <text textSize="{{TEXT_SIZE}}" textColor="{{TEXT_COLOR}}" text="秒" />
+                    </horizontal>
+                    <horizontal>
+                      <text textSize="{{TEXT_SIZE}}" w="auto" textColor="{{TEXT_COLOR}}" text="任务页停留时间" />
+                      <input id="taskInterval" w="auto" minWidth="50" textColor="{{INPUT_TEXT_COLOR}}" text="{{config.taskInterval}}" hint="{{default_conf.taskInterval}}" />
+                      <text textSize="{{TEXT_SIZE}}" w="auto" textColor="{{TEXT_COLOR}}" text="秒" />
+                    </horizontal>
+                    <horizontal>
+                      <text textSize="{{TEXT_SIZE}}" w="auto" textColor="{{TEXT_COLOR}}" text="连续失败" />
+                      <input id="stopByFailNum" w="auto" minWidth="50" textColor="{{INPUT_TEXT_COLOR}}" text="{{config.stopByFailNum}}" hint="{{default_conf.stopByFailNum}}" />
+                      <text textSize="{{TEXT_SIZE}}" w="auto" textColor="{{TEXT_COLOR}}" text="个任务后停止运行" />
+                    </horizontal>
+                    <horizontal>
+                      <text textSize="{{TEXT_SIZE}}" w="auto" textColor="{{TEXT_COLOR}}" text="完成多少" />
+                      <input id="stopByFinishNum" w="auto" minWidth="50" textColor="{{INPUT_TEXT_COLOR}}" text="{{config.stopByFinishNum}}" hint="{{default_conf.stopByFinishNum}}" />
+                      <text textSize="{{TEXT_SIZE}}" w="auto" textColor="{{TEXT_COLOR}}" text="个停止" />
+                    </horizontal>
+                  </vertical>
+                </horizontal>
+              </card>
+              <text padding="10 20 30 40" bg="#f1f1f1" w="*" h="8sp" text=" "/>
+              <text text="其他任务平台" gravity="center" textSize="14" textColor = "#f2c900" />
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="{{my_color}}" h="*" w="10" />
+                <Switch id="zhuanyue" checked ={storage.get("zhuanyue",[false])}  h="60"/>
+                <text text="2.58转阅任务" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="次数" gravity="left" textSize="11" />
+                <input id="zhuanyue1" gravity="left" text={storage.get("zhuanyue1",[60])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "zhuanyuebb" textSize="10" lines="1" width="30"/>
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download86" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src={downpng}/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" " id="zhuanyuefg"/>
+              <scroll padding="0" h="auto"  bg="{{my_color}}" id="zhuanyuesz">
+                <vertical marginLeft="10"  h="650" bg="#ffffff">
+                  <card w="*" h="auto"
+                                      cardElevation="2dp" gravity="center_vertical" marginBottom="5dp" >
+                    <vertical >
+                      <View bg="#F3F3F3" h="2" w="*"/>
+                      <text w="*" h="30" text="全局设置" textSize="12sp" textStyle="bold" bg="#ffffff" textColor="#666666" padding="15 5" gravity="center" layout_gravity="right|center" />
+                      <View bg="#F3F3F3" h="2" w="*"/>
+                      <vertical padding="8 0">
+                        <horizontal>
+                          <text text="账号:" textColor="#000000" textSize="12sp" />
+                          <input id="zhuanyue_username" text={storage.get("zhuanyue_username",[])} textSize="12sp" textColorHint="#4F4F4F"/>
+                          <text text="密码:" textColor="#000000" marginLeft="10" textSize="12sp" />
+                          <input id="zhuanyue_password" text={storage.get("zhuanyue_password",[])} textSize="12sp" textColorHint="#4F4F4F"/>
+                          <text text="方案名称:" textColor="#000000" marginLeft="10" textSize="12sp" />
+                          <input id="zhuanyue_fangan" text={storage.get("zhuanyue_fangan",['阅读'])} textSize="12sp" textColorHint="#4F4F4F"/>
+                        </horizontal>
+                        <horizontal gravity="center" marginBottom="10">
+                          <button text="注册账号" id="注册账号"  style="Widget.AppCompat.Button.Colored" w="70" textColor="#FFFFFF" textSize="10sp"/>
+                          <button text="账号中心" id="账号中心"  style="Widget.AppCompat.Button.Colored" w="70" textColor="#FFFFFF" textSize="10sp"/>
+                          <button text="充值中心" id="充值中心"  style="Widget.AppCompat.Button.Colored" w="70" textColor="#FFFFFF" textSize="10sp"/>
+                          <button text="设置方案" id="设置方案"  style="Widget.AppCompat.Button.Colored" w="70" textColor="#FFFFFF" textSize="10sp"/>
+                        </horizontal>
+                        <vertical>
+                          <horizontal>
+                            <webview id="web_zhuanyue" margin="0" h="auto"/>
+                          </horizontal>
+                        </vertical>
+                      </vertical>
+                    </vertical>
+                  </card>
+                </vertical>
+              </scroll>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent" h="0">
+                <View bg="#00BFFF" h="*" w="10" />
+                <Switch id="wkzz" checked ={storage.get("wkzz",[false])}  h="60"/>
+                <text text="5.微客众智" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="D音进入" gravity="left" textSize="12" />
+                <input id="wkzz1" gravity="left" text={storage.get("wkzz1",[4])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text="K手进入" gravity="left" textSize="12" />
+                <input id="wkzz2" gravity="left" text={storage.get("wkzz2",[1])} textSize="12sp" textSizeHint = "12sp"/>
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download35" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src="http://gm.z8s.com/runjs/down.png"/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              <horizontal layout_width="match_parent">
+                <View bg="#00BFFF" h="*" w="10" />
+                <Switch id="wkzzxhs" checked ={storage.get("wkzzxhs",[false])}  h="60"/>
+                <text text="6.微客众智" gravity="left" textSize="14" textColor = "#f2c900" />
+                <text text="小红薯进入" gravity="left" textSize="12" />
+                <input id="wkzzxhs1" gravity="left" text={storage.get("wkzzxhs1",[2])} textSize="12sp" textSizeHint = "12sp"/>
+                <text text=" 版本号:" gravity="left" id = "fff"textSize="10" />
+                <text text="" gravity="left" textColor="#4fb3ff" id = "wkzzbb"textSize="10" />
+                <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                  <img  id="Download39" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src="http://gm.z8s.com/runjs/down.png"/>
+                </horizontal>
+              </horizontal>
+              <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+            </vertical>
+          </ScrollView>
+        </card>
+      </frame>
+    </viewpager>
+  </vertical>
+  <vertical layout_gravity="left" bg="#ffffff" w="300">
+    <img w="*" h="120" scaleType="fitXY" src={logo.get('src',[""])}/>
+    <ScrollView layout_width="match_parent">
+      <vertical>
+        <horizontal h="40">
+          <text bg="#f2f2f2" w="1" h="40" text=" "/>
+          <button layout_weight="2" h="40" id="Re_Btn" text="重置文章记录" textStyle = "bold" textColor="#FFFFFF" bg="{{my_color}}"/>
+          <text bg="#f2f2f2" w="1" h="40" text=" "/>
+          <button layout_weight="2" h="40" id="Re_Btn2" text="重置提现记录" textStyle = "bold" textColor="#FFFFFF" bg="{{my_color}}"/>
+          <text bg="#f2f2f2" w="1" h="40" text=" "/>
+        </horizontal>
+        <horizontal>
+          <text text="无障碍(必选)"  textSize="12sp" textColor="#333333"  minWidth="255" padding="10 0" layout_gravity="center"/>
+          <Switch id="autoService" checked="{{auto.service != null}}"  switchMinWidth="50sp" layout_gravity="right|bottom" h="40"/>
+        </horizontal>
+        <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+        <horizontal h="40">
+          <text text="清理SD卡"  textSize="13sp"  minWidth="255" padding="10 0" layout_gravity="center"/>
+          <Switch id="清理内存" checked ={清理内存storages.get("是否清理",[false])}   switchMinWidth="50sp" layout_gravity="right|bottom" h="40"/>
+        </horizontal>
+        <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+        <horizontal h="40">
+          <text text="深度清理"  textSize="13sp"  minWidth="255" padding="10 0" layout_gravity="center"/>
+          <Switch id="深度清理" checked ={深度清理storages.get("深度清理",[false])} switchMinWidth="50sp" layout_gravity="right|bottom" h="40" />
+        </horizontal>
+        <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+        <horizontal h="40">
+          <text text="自动提现"  textSize="13sp"  minWidth="250" padding="10 0" layout_gravity="center"/>
+          <Switch id="自动提现" checked ={storage.get("自动提现",[false])} switchMinWidth="50sp" layout_gravity="right|bottom" h="40" />
+        </horizontal>
+        <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+        <horizontal h="40">
+          <text text="本地打码" textSize="13sp"  minWidth="250" padding="10 0" layout_gravity="center"/>
+          <Switch  id="本地打码" checked ={storage.get("本地打码",[true])} switchMinWidth="50sp" layout_gravity="right|bottom" h="40" />
+        </horizontal>
+        <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+        <horizontal h="40">
+          <text text="微信养号" textSize="13sp" padding="10 0" layout_gravity="center"/>
+          <input id="wxyhjg" text ={storage.get("wxyhjg",[350])} textSize="12sp"  layout_gravity="center"/>
+          <text text="分钟，运行一次" textSize="13sp" padding="10 0" layout_gravity="center" minWidth="150"/>
+          <Switch id="wxyh" checked ={storage.get("wxyh",[false])} switchMinWidth="50sp" layout_gravity="right|bottom" h="40" />
+        </horizontal>
+        <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+        <horizontal h="40">
+          <text text="短视频养号  点击设置"  textSize="13sp" id="DSPyanghao"   minWidth="250" padding="10 0" layout_gravity="center"/>
+          <Switch id="dspyh" checked ={storage.get("dspyh",[false])} switchMinWidth="50sp" layout_gravity="right|bottom" h="40" />
+        </horizontal>
+        <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+        <horizontal h="40">
+          <text text="自动传(D音/K手)每日" textSize="10sp" paddingLeft="10" layout_gravity="center" />
+          <input id="zpcs" text ={storage.get("zpcs",[1])} textSize="10sp" />
+          <text text="作品" textSize="10sp" layout_gravity="center" />
+          <spinner id="spzdsczp" entries="下载上传|拍摄上传" textSize="10sp" textColor="#F68D06" marginTop="1" gravity="center"/>
+          <Switch  id="自动上传作品" checked ={storage.get("自动上传作品",[false])}  switchMinWidth="50sp" layout_gravity="right|bottom" h="40" />
+        </horizontal>
+        <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+        <horizontal h="40">
+          <text text="看直播养号,每次观看" textSize="10sp" padding="10 0" layout_gravity="center" />
+          <input id="kzbsj" text ={storage.get("kzbsj",[10])} textSize="10sp" layout_gravity="center"/>
+          <text text="分钟" textSize="10sp" padding="10 0" layout_gravity="center"  minWidth="115"/>
+          <Switch  id="观看直播时间" checked ={storage.get("观看直播时间",[false])} switchMinWidth="50sp" layout_gravity="right|bottom" h="40" />
+        </horizontal>
+        <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+        <horizontal h="40">
+          <text text="取消关注,每天取消" textSize="10sp" paddingLeft="10" layout_gravity="center" />
+          <input id="qxgzcs" text ={storage.get("qxgzcs",[20])} textSize="10sp" />
+          <text text="关注" textSize="10sp" layout_gravity="center" />
+          <spinner id="qxgzlx" entries="D音和K手|D音|K手" textSize="10sp" w="115"/>
+          <Switch  id="自动取消关注" checked ={storage.get("自动取消关注",[false])}  switchMinWidth="50sp" layout_gravity="right|bottom" h="40" />
+        </horizontal>
+        <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+        <horizontal  w="0" h="0">
+          <button id="手动代码" text="手动更新云脚本"  textStyle = "bold" textColor="#FFFFFF" bg="#0000FF" />
+          <button layout_weight="2" id="手动更新" text="手动更新内框架" textStyle = "bold" textColor="#FFFFFF" bg="#CDC9A5" />
+        </horizontal>
+      </vertical>
+    </ScrollView>
+  </vertical>
+</drawer>
+);
+
+
+运行时间戳 = Date.parse(new Date())/1000;
+
+if(ui.jrtthb.checked==true){
+ui.jrttsz.visibility = 0;
+ui.jrttfg.visibility=8;
+}else{
+ui.jrttsz.visibility = 8;
+ui.jrttfg.visibility=0;
+}
+
+ui.jrtthb.click(function(){
+if(ui.jrtthb.checked==true){
+  ui.jrttsz.visibility = 0;
+  ui.jrttfg.visibility=8;
+}else{
+  ui.jrttsz.visibility = 8;
+  ui.jrttfg.visibility=0;
+}
+})
+
+
+if(ui.pddhb.checked==true){
+ui.pddhbsz.visibility = 0;
+ui.pddhbfg.visibility=8;
+}else{
+ui.pddhbsz.visibility = 8;
+ui.pddhbfg.visibility=0;
+}
+
+ui.pddhb.click(function(){
+if(ui.pddhb.checked==true){
+  ui.pddhbsz.visibility = 0;
+  ui.pddhbfg.visibility=8;
+}else{
+  ui.pddhbsz.visibility = 8;
+  ui.pddhbfg.visibility=0;
+}
+})
+
+
+
+if(ui.zhuanyue.checked==true){
+ui.zhuanyuesz.visibility = 0;
+ui.zhuanyuefg.visibility=8;
+}else{
+ui.zhuanyuesz.visibility = 8;
+ui.zhuanyuefg.visibility=0;
+}
+
+ui.zhuanyue.click(function(){
+if(ui.zhuanyue.checked==true){
+  ui.zhuanyuesz.visibility = 0;
+  ui.zhuanyuefg.visibility=8;
+}else{
+  ui.zhuanyuesz.visibility = 8;
+  ui.zhuanyuefg.visibility=0;
+}
+})
+
+
+ui.web_zhuanyue.loadUrl("http://ja.bigliang.cn/wxTask/login/main.action");
+ui.web_zhuanyue.visibility = 8;
+ui.web_zhuanyue.getSettings().setJavaScriptEnabled(true);
+var settings = ui.web_zhuanyue.getSettings()
+settings.setUseWideViewPort(true);
+settings.setLoadWithOverviewMode(true);
+settings.setDomStorageEnabled(true);
+settings.setDefaultTextEncodingName("UTF-8");
+settings.setAllowContentAccess(true); // 是否可访问Content Provider的资源，默认值 true
+settings.setAllowFileAccess(true);    // 是否可访问本地文件，默认值 true
+// 是否允许通过file url加载的Javascript读取本地文件，默认值 false
+settings.setAllowFileAccessFromFileURLs(false);
+// 是否允许通过file url加载的Javascript读取全部资源(包括文件,http,https)，默认值 false
+settings.setAllowUniversalAccessFromFileURLs(false);
+//开启JavaScript支持
+settings.setJavaScriptEnabled(true);
+// 支持缩放
+settings.setSupportZoom(true)
+
+
+
+var 屏蔽线程="";
+屏蔽线程 = setInterval(() => {
+ui.run(() => {
+  ui.web_zhuanyue.loadUrl("javascript:$('#demo').css('display','none');");
+  ui.web_zhuanyue.loadUrl("javascript:$('strong').text('"+names+"');");
+  //ui.web_zhuanyue.loadUrl("javascript:$('.btn-group-justified').css('display','none');");
+  ui.web_zhuanyue.loadUrl("javascript:$('a:contains(\"收徒推广\")').attr('href','#');");
+  ui.web_zhuanyue.loadUrl("javascript:$('a:contains(\"提取链接教程\")').css('display','none');");
+  ui.web_zhuanyue.loadUrl("javascript:$('a:contains(\"四海平台教程\")').css('display','none');");
+});
+}, 300);
+
+ui.注册账号.click(function(){
+ui.web_zhuanyue.visibility = 0;
+ui.web_zhuanyue.loadUrl("http://ja.bigliang.cn/wxTask/login/main.action");
+})
+
+ui.账号中心.click(function(){
+ui.web_zhuanyue.visibility = 0;
+ui.web_zhuanyue.loadUrl("http://ja.bigliang.cn/wxTask/dashboard/userInfo.action");
+})
+
+ui.充值中心.click(function(){
+ui.web_zhuanyue.visibility = 0;
+ui.web_zhuanyue.loadUrl("http://ja.bigliang.cn/wxTask/dashboard/pointsAdd.action");
+})
+
+ui.设置方案.click(function(){
+ui.web_zhuanyue.visibility = 0;
+ui.web_zhuanyue.loadUrl("http://ja.bigliang.cn/wxTask/dashboard/planList.action");
+})
+
+
+
+
+if(ui.dyhb.checked==true){
+ui.dyhbsz.visibility = 0;
+}else{
+ui.dyhbsz.visibility = 8;
+}
+
+ui.dyhb.click(function(){
+if(ui.dyhb.checked==true){
+  ui.dyhbsz.visibility = 0;
+}else{
+  ui.dyhbsz.visibility = 8;
+}
+})
+
+ui.pager.setTitles(["设置大全", 阅读平台, "综合任务", "任务平台"]);
+ui.tabs.setupWithViewPager(ui.pager);
+ui.toolbar.setupWithDrawer(ui.drawer);
+
+
+ui.BtnExit.click(function(){
+toast("退出程序");
+engines.stopAll();
+})
+
+
+
+
+
+/*94开始*/
+
+ui.web.visibility = 8;
+// 94app界面加载进来
+ui.web.loadUrl(URL);
+ui.web.getSettings().setJavaScriptEnabled(true);
+var settings = ui.web.getSettings()
+settings.setUseWideViewPort(true);
+settings.setLoadWithOverviewMode(true);
+settings.setDomStorageEnabled(true);
+settings.setDefaultTextEncodingName("UTF-8");
+settings.setAllowContentAccess(true); // 是否可访问Content Provider的资源，默认值 true
+settings.setAllowFileAccess(true);    // 是否可访问本地文件，默认值 true
+// 是否允许通过file url加载的Javascript读取本地文件，默认值 false
+settings.setAllowFileAccessFromFileURLs(false);
+// 是否允许通过file url加载的Javascript读取全部资源(包括文件,http,https)，默认值 false
+settings.setAllowUniversalAccessFromFileURLs(false);
+//开启JavaScript支持
+settings.setJavaScriptEnabled(true);
+// 支持缩放
+settings.setSupportZoom(true)
+
+
+
+// 无障碍服务
+ui.autoService.on("check", function (checked) {
+// 用户勾选无障碍服务的选项时，跳转到页面让用户去开启
+if (checked && auto.service == null) {
+  app.startActivity({
+      action: "android.settings.ACCESSIBILITY_SETTINGS"
+  });
+}
+if (!checked && auto.service != null) {
+  auto.service.disableSelf();
+}
+});
+
+// 任务加速
+ui.midmode.on("check", function (checked) 
+{   if(checked)
+{
+  ui.bringOngoing.setChecked(false);
+  ui.bringBefore.setChecked(false);
+}
+});
+ui.quickMod.on("check", function (checked) 
+{   if(checked)
+{
+  ui.bringOngoing.setChecked(false);
+  ui.bringBefore.setChecked(false);
+}
+});
+
+/**悬浮窗 */
+//app.openAppSetting(currentPackage());
+
+
+// 隐藏/显示任务设置
+threads.start(function () {
+ui.run(() => {
+  ui.taskSetting.visibility = 8;
+});
+});
+ui.showTaskSetting.click(() => {
+if (ui.showTaskSetting.getText() == "隐藏设置") {
+  ui.showTaskSetting.setText("显示设置");
+  ui.taskSetting.visibility = 8;
+} else {
+  ui.showTaskSetting.setText("隐藏设置");
+  ui.taskSetting.visibility = 0;
+}
+});
+
+
+ui.removecookie.click(() => {
+cookieManager.removeAllCookie();
+cookieManager.removeSessionCookie();
+config.token="";
+ui.web.loadUrl(URL);
+});
+
+auto.setWindowFilter((info) => {
+return true;
+});
+
+
+
+
+// 检查更新
+function checkUpdate() {
+threads.start(function () {
+  var responce= hzServer.checkUpdate(config);
+  if(responce.ip&&responce.ip!=config.ip)
+  {
+      config.ip=responce.ip;
+      saveConfig();
+  }
+});
+}
+
+//更新token
+function updateToken() 
+{
+hz94.cookieStr=config.cookieStr;
+var responce= hz94.getToken();
+if(responce.success == true)
+{
+  var token=responce.obj;
+  //log("t:"+token);
+  if(token.length>0)
+  {
+       if(config.token==""||config.token!=token)
+      {
+          config.token=token; 
+          saveConfig();
+      }
+  }
+  else
+  {
+      log("t length 0");
+  }
+}
+else
+{
+  log("t eror:"+responce.msg);
+}
+}
+function updateIp()
+{
+var thread = threads.start(function(){
+  //在子线程执行的定时器
+  setInterval(function(){
+     // log("子线程:" + threads.currentThread());
+      var responce=hzServer.getServer();
+      if(responce&&responce.data&&responce.data.ip&&responce.data.ip!=config.ip)
+      {
+          config.ip=responce.data.ip;
+          saveIp();
+      }
+     // config.ip="1.1.1.1";
+  }, 120000);
+});
+}
+
+
+if(config.cookieStr)
+{
+threads.start(function () {
+  updateToken();
+});
+}
+
+try {
+checkUpdate(); 
+updateIp();
+} catch (error) {
+
+}
+
+
+function start94() 
+{
+// 这里写脚本的主逻辑
+  console.info("开始运行");
+
+  if (!(config.doDyFocus || config.doDyLike || config.doHsFocus || config.doHsLike||config.doQDyFocus||config.doQDyLike||config.doKsFocus)) {
+      alert("未选任务");
+      exit();
+  }
+
+  // 屏幕常亮
+  device.keepScreenOn(5 * 3600 * 1000);
+  hz94.run(config);
+  console.info("任务运行结束");
+  storagesd.put("yzx94", config.stopByFinishNum);
+}
+/*94结束*/
+
+var web监听开启 = true;
+setInterval(() => {
+ui.run(() => {
+
+  var cookieStr = cookieManager.getCookie(URL);
+  if (!cookieStr || cookieStr.indexOf("JSESSIONID=") == -1) 
+  {
+      ui.web.loadUrl("javascript:$(\".ui-title\").text(\"任务中心\");");
+      ui.web.loadUrl("javascript: $('a[href$=\"pageController.do?connectus\"]:first').css('display','none');");
+  }else{
+      if(ui.web.url&&ui.web.url.indexOf("/h8/pageController.do?index") !== -1){
+          log(ui.web.getUrl());
+          ui.web.loadUrl(URL2);
+      }
+      ui.web.loadUrl("javascript:$(\".ui-title\").text(\"任务中心\");");
+      ui.web.loadUrl("javascript: $('a[href$=\"pageController.do?connectus\"]:first').css('display','none');");
+  }
+});
+}, 300);
+
+ui.login94.setText("显示"+name_rw);
+ui.login94.click(() => {
+if (ui.web.visibility == 0) {
+  web监听开启=false;
+  ui.web.visibility = 8;
+  ui.login94.setText("显示"+name_rw);
+  toast("内容已隐藏!");
+} else {
+  ui.web.visibility = 0;
+  ui.login94.setText("隐藏"+name_rw);
+  toast("内容已显示!");
+
+}
+});
+
+ui.copy_yqm.click(() => {
+setClip("019784356102");
+toast("已复制官方邀请码!");
+});
+
+if(files.exists("coin.wav")){
+media.playMusic("coin.wav");
+}
+
+ui.web.loadUrl(URL);
+ui.web.getSettings().setJavaScriptEnabled(true);
+
+
+//短视频养号
+ui.DSPyanghao.click((view)=>{
+var dialog = new android.app.AlertDialog.Builder(activity).create()
+dialog.setView(new android.widget.EditText(context))
+dialog.show();
+dialog.setCancelable(false)
+var window = dialog.getWindow(); 
+window.setDimAmount(0.6);
+
+var douyinselfUrl=ui.inflate( 
+       
+<vertical>
+  <linear gravity="center">
+    <text text="短视频养号设置"  size="20" color="#000000" padding="12 12"/>
+  </linear>
+  <vertical margin="25 0 25 10">
+    <linear gravity="center">
+      <horizontal>
+        <input id="dspjg" text ={storage.get("dspjg",[350])} textSize="15sp" />
+        <text text="分钟一次,每次" textSize="15sp" textColor="#F68D06" textStyle="bold" />
+        <input id="dspcs" text ={storage.get("dspcs",[20])} textSize="15sp" />
+        <text text="个视频" textSize="15sp" textColor="#F68D06" textStyle="bold" />
+      </horizontal>
+    </linear>
+    <linear gravity="center">
+      <horizontal>
+        <text text="关注概率" textSize="15sp" textColor="#F68D06" textStyle="bold" />
+        <input id="dspgz" text ={storage.get("dspgz",[0])} textSize="15sp" />
+        <text text="% 点赞概率" textSize="15sp" textColor="#F68D06" textStyle="bold" />
+        <input id="dspdz" text ={storage.get("dspdz",[0])} textSize="15sp" />
+        <text text="%" textSize="15sp" textColor="#F68D06" textStyle="bold" />
+      </horizontal>
+    </linear>
+    <linear gravity="center">
+      <text text="每个视频浏览" textSize="15sp" textColor="#F68D06" textStyle="bold" />
+      <input id="dspsj1" text ={storage.get("dspsj1",[7])} textSize="15sp" />
+      <text text="-" textSize="15sp" textColor="#F68D06" textStyle="bold" />
+      <input id="dspsj2" text ={storage.get("dspsj2",[10])} textSize="15sp" />
+      <text text="秒" textSize="15sp" textColor="#F68D06" textStyle="bold" />
+    </linear>
+    <linear gravity="center">
+      <text text="选择平台  " textSize="15sp" textColor="#F68D06" textStyle="bold" />
+      <spinner id="dsplx" entries="D音和K手|D音|K手" textSize="15sp" textColor="#F68D06"  />
+    </linear>
+  </vertical>
+  <relative>
+    <button id="cancle" layout_alignParentLeft="true" text="取消" style="Widget.AppCompat.Button.Borderless.Colored" w="auto"/>
+    <button id="save" layout_alignParentRight="true" text="保存" style="Widget.AppCompat.Button.Borderless.Colored" w="auto"/>
+  </relative>
+</vertical>)
+douyinselfUrl.dsplx.setSelection(storage2.get("dsplx", [0]));
+window.setContentView(douyinselfUrl);
+douyinselfUrl.cancle.click(()=>{dialog.dismiss();});
+douyinselfUrl.save.click(() =>{
+  threads.start(function() {
+      storage.put("dspjg", parseInt(douyinselfUrl.dspjg.getText()));
+      storage.put("dspcs", parseInt(douyinselfUrl.dspcs.getText()));
+      storage.put("dspgz", parseInt(douyinselfUrl.dspgz.getText()));
+      storage.put("dspdz", parseInt(douyinselfUrl.dspdz.getText()));
+      storage.put("dspsj1", parseInt(douyinselfUrl.dspsj1.getText()));
+      storage.put("dspsj2", parseInt(douyinselfUrl.dspsj2.getText()));
+      storage2.put("dsplx", parseInt(douyinselfUrl.dsplx.getSelectedItemPosition()));
+      toast("完成保存");
+      dialog.dismiss();
+  });
+});
+});
+ui.autoService.checked = auto.service != null;
+
+
+/***自定义悬浮控制台***/
+function 当前时间(){
+let date= new Date();
+let d = date.getDate();
+d = d < 10 ? ('0' + d) : d;
+let h = date.getHours();
+h = h < 10 ? ('0' + h) : h;
+let m = date.getMinutes();
+m = m < 10 ? ('0' + m) : m;
+let s = date.getSeconds();
+s = s < 10 ? ('0' + s) : s;
+updateTime = d + ' ' + h + ':' + m + ':' + s;
+return updateTime;
+}
+
+
+
+function my_console(关){
+
+  var 控制台 = {
+  开:function(){
+      if(悬浮控制台){
+          悬浮控制台.close();
+      }
+
+      if(悬浮启停){
+          悬浮启停.close();
+      }
+
+      悬浮控制台="";
+      悬浮启停="";
+
+      悬浮控制台 = floaty.rawWindow(
+          
+<frame gravity="center">
+  <card id="悬浮窗背景" w="*" h="*" cardCornerRadius="3dp">
+    <img id="img" w="*" h="auto" src='{{console_png}}' gravity="center" alpha="0.70"/>
+    <horizontal w="*" h="*" gravity="left" marginTop="{{Math.floor(device.height*0.21/4+5)}}px">
+      <vertical layout_gravity="left|center" h="*" w="auto" padding="10" marginLeft="{{Math.floor(device.width*0.1/2)}}px">
+        <horizontal  w="*" gravity="left" padding="5 2">
+          <text size="10" textColor="#FFFFFF" bg="#6da8b5" padding="5 0" marginRight="2" text="时长:" />
+          <text id="脚本时间" size="10" textColor="#FFFFFF" text="10" />
+          <text id="" size="10" textColor="#FFFFFF" text="分钟" />
+        </horizontal>
+        <horizontal  w="*" gravity="left" padding="5 2">
+          <text size="10" textColor="#FFFFFF" bg="#6da8b5" padding="5 0" marginRight="2" text="任务:" />
+          <text id="当前任务" size="10" textColor="#FFFFFF" w="70" text="{{当前任务名称}}" />
+        </horizontal>
+        <horizontal  w="*" gravity="left" padding="5 2">
+          <text size="10" textColor="#FFFFFF" bg="#6da8b5" padding="5 0" marginRight="2" text="概况:" />
+          <text id="当前任务次数" size="10" textColor="#FFFFFF" text="未知" />
+        </horizontal>
+      </vertical>
+      <ScrollView layout_width="match_parent"  h="*" w="auto" gravity="left" padding="10" marginTop="-12" marginLeft="{{Math.floor(device.width*0.1/2)}}px">
+        <vertical layout_gravity="left" >
+          <text id="记录" text="运行日志" textColor="#FFFFFF" textSize="10sp"/>
+        </vertical>
+      </ScrollView>
+    </horizontal>
+  </card>
+</frame>
+      )
+
+      悬浮启停 = floaty.rawWindow(
+          
+<frame w="auto" h="20">
+  <horizontal  w="*" h="20" gravity="center">
+    <text id="状态" text="暂停" size="10" textColor="#FFFFFF" bg="#02c9d8" marginRight="5"/>
+    <text id="停止" text="停止" size="10" textColor="#FFFFFF" bg="#02c9d8" marginRight="5"/>
+    <text id="隐藏" text="隐藏" w="20" size="10" textColor="#FFFFFF" bg="#02c9d8" marginRight="5"/>
+    <text id="日志" text="日志" size="10" textColor="#FFFFFF" bg="#02c9d8" marginRight="5"/>
+  </horizontal>
+</frame>

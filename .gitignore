@@ -1,0 +1,8 @@
+# compiled output
+/dist
+/node_modules
+/laradock
+/docker
+/admin-finish
+yarn.lock
+package-lock.json

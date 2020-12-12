@@ -1,0 +1,578 @@
+<!-- wrap: ui.layout -->
+<frame>
+  <drawer id="drawer">
+    <vertical h="*" gravity="center">
+      <appbar>
+        <toolbar id="toolbar" bg="{{__ARG0__.my_color}}" title="{{__ARG0__.names}}" size="16" h="36" >
+          <button bg="{{__ARG0__.my_color}}" id="BtnExit" layout_gravity="right" textColor="#ffffff" text="离开" style="Widget.AppCompat.Button.Borderless.Colored" w="auto" />
+          <button bg="{{__ARG0__.my_color}}" id="help" layout_gravity="right" textColor="#ffffff" text="使用教程" h="{{__ARG0__.jiaocheng_h}}" style="Widget.AppCompat.Button.Borderless.Colored" w="auto" />
+        </toolbar>
+        <tabs id="tabs" bg="{{__ARG0__.my_color}}" size="14" h="28" tabIndicatorColor="#FFFFFF"/>
+        <vertical id = "logo" gravity="center" bg="#ffffff" w="*" h="132">
+          <img w="*" h="*" src="{{__ARG0__.logourl}}"  scaleType="fitXY"/>
+        </vertical>
+        <button id="runBtn" bg="{{__ARG0__.my_color}}" text="点击开始运行[音量-停止运行]" tag="scriptTag" color="#ffffff" foreground="?selectableItemBackground"/>
+      </appbar>
+      <viewpager  h="*" id="viewpager">
+        <frame>
+          <card w="*" h="*" margin="5" cardCornerRadius="6dp">
+            <ScrollView layout_width="match_parent"  layout_gravity="center">
+              <vertical>
+                <horizontal layout_width="match_parent" margin="12 5"  elevation="1dp">
+                  <text text="注册码:" gravity="left" textColor="#444444" size="12sp" />
+                  <input id="jhm" gravity="left"  onfocus="this.blur();" text="" hint="请输入注册码"  textSize="12sp" textSizeHint = "12sp"/>
+                  <button id="code_check" text="激活/查询" h="28" w="60" textSize="8sp" padding="0 2" margin="2 0" textColor="#FFFFFF" bg="{{__ARG0__.my_color}}" style="Widget.AppCompat.Button.Borderless.Colored"/>
+                  <button id="rizhi" text="日志" h="28" w="60" textSize="8sp" padding="0 2" margin="2 0" textColor="#FFFFFF" bg="{{__ARG0__.my_color}}" style="Widget.AppCompat.Button.Borderless.Colored"/>
+                </horizontal>
+                <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+                <horizontal layout_width="match_parent" margin="12 5"  elevation="1dp">
+                  <text text="联众打码账号:" textColor="#444444" size="12sp"/>
+                  <text text="密码:" textColor="#444444" size="12sp"/>
+                  <input id="联众账号" hint = "请输入账号" text="" textColor="#444444" w="auto" textSize="12sp" textSizeHint = "12sp"/>
+                  <input id="联众密码" hint = "请输入密码" text="" textColor="#444444" w="auto" textSize="12sp" textSizeHint = "12sp"/>
+                </horizontal>
+                <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+                <horizontal layout_width="match_parent"   margin="5 5">
+                  <Switch id="yjxx" checked="" />
+                  <text text="夜间休息时间,从" gravity="left" textSize="12sp" />
+                  <input id="yjxx1" gravity="left" text="" textSize="15sp" textSizeHint = "15sp"/>
+                  <text text="点开始到" gravity="left" textSize="12sp" />
+                  <input id="yjxx2" gravity="left" text=""  textSize="15sp" textSizeHint = "15sp"/>
+                  <text text="点结束" gravity="left" textSize="12sp"/>
+                </horizontal>
+                <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+                <horizontal layout_width="match_parent"    margin="5 5">
+                  <Switch id="tdsd" checked="" />
+                  <text text="从" gravity="left" textSize="12sp" />
+                  <input id="tdsd1" gravity="left" text="" textSize="12sp" textSizeHint = "12sp"/>
+                  <text text="点到" gravity="left" textSize="12sp" />
+                  <input id="tdsd2" gravity="left" text="" textSize="12sp" textSizeHint = "12sp"/>
+                  <text text="点时间段内只运行" gravity="left" textSize="12sp"/>
+                  <spinner id="tdsdxz" entries="平台选择" textSize="10sp" textColor="#F68D06"  gravity="left"/>
+                </horizontal>
+                <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+                <horizontal layout_width="match_parent"  margin="5 5">
+                  <Switch id="dsdt2" checked="" />
+                  <text text="从" gravity="left" textSize="12sp" />
+                  <input id="dsdt11" gravity="left" text="" textSize="12sp" textSizeHint = "12sp"/>
+                  <text text="点到" gravity="left" textSize="12sp" />
+                  <input id="dsdt22" gravity="left" text="" textSize="12sp" textSizeHint = "12sp"/>
+                  <text text="点时间段内只运行" gravity="left" textSize="12sp"/>
+                  <spinner id="dsdt2xz" entries="平台选择" textSize="10sp" textColor="#F68D06"  gravity="left"/>
+                </horizontal>
+                <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+                <horizontal gravity="center_horizontal" margin="0 5">
+                  <text bg="#f2f2f2" w="1" h="40" text=" "/>
+                  <button id="一键勾选" text="一键勾选或取消" h="40" w="70" textSize="8sp" padding="0 2" margin="2 0" textColor="#FFFFFF" bg="{{__ARG0__.my_color}}" style="Widget.AppCompat.Button.Borderless.Colored"/>
+                  <text bg="#f2f2f2" w="1" h="40" text=" "/>
+                  <button id="多开下载" text="双开助手"  h="40" w="50" textSize="8sp" padding="0 2" margin="2 0" textColor="#FFFFFF" bg="{{__ARG0__.my_color}}" style="Widget.AppCompat.Button.Borderless.Colored"/>
+                  <text bg="#f2f2f2" w="1" h="40" text=" "/>
+                  <button id="应用宝下载" text="应用宝"  h="40" w="40" textSize="8sp" padding="0 2" margin="2 0" textColor="#FFFFFF" bg="{{__ARG0__.my_color}}" style="Widget.AppCompat.Button.Borderless.Colored"/>
+                  <text bg="#f2f2f2" w="1" h="40" text=" "/>
+                  <button id="Download一键下载" text="一键下载/更新" h="40" w="0" textSize="8sp" padding="0 2" margin="2 0" textColor="#FFFFFF" bg="{{__ARG0__.my_color}}" style="Widget.AppCompat.Button.Borderless.Colored"/>
+                  <text bg="#f2f2f2" w="1" h="40" text=" "/>
+                  <button id="猎豹清理" text="猎豹清理" h="40" w="50" textSize="8sp" padding="0 2" margin="2 0" textColor="#FFFFFF" bg="{{__ARG0__.my_color}}" style="Widget.AppCompat.Button.Borderless.Colored"/>
+                  <text bg="#f2f2f2" w="1" h="40" text=" "/>
+                </horizontal>
+              </vertical>
+            </ScrollView>
+          </card>
+        </frame>
+        <frame>
+          <card id="card2" w="*" h="*" margin="10 5" cardCornerRadius="2dp" cardElevation="1dp" foreground="?selectableItemBackground">
+            <ScrollView layout_width="match_parent"  layout_gravity="center">
+              <vertical>
+                <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+                <horizontal layout_width="match_parent">
+                  <View bg="{{__ARG0__.my_color}}" h="*" w="10" />
+                  <Switch id="jkd" checked="" h="60"/>
+                  <text text="1.聚看点" gravity="left" textSize="14" textColor = "#f2c900" />
+                  <text text="文章" gravity="left" textSize="12" />
+                  <input id="jkd1" gravity="left" text="" textSize="12sp" textSizeHint = "12sp"/>
+                  <text text="视频" gravity="left" textSize="12" />
+                  <input id="jkd2" gravity="left" text="" textSize="12sp" textSizeHint = "12sp"/>
+                  <text text=" 版本号:" gravity="left" id = "fff" textSize="10" />
+                  <text text="" gravity="left" textColor="#4fb3ff" id = "jkdbb" textSize="10" lines="1" width="30"/>
+                  <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                    <img  id="Download1" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src="{{__ARG0__.logourl}}"/>
+                  </horizontal>
+                </horizontal>
+                <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+                <horizontal layout_width="match_parent">
+                  <View bg="{{__ARG0__.my_color}}" h="*" w="10" />
+                  <Switch id="wlkk" checked="" h="60"/>
+                  <text text="2.微鲤" gravity="left" textSize="14" textColor = "#f2c900" />
+                  <text text="文章" gravity="left" textSize="12" />
+                  <input id="wlkk1" gravity="left" text="" textSize="12sp" textSizeHint = "12sp"/>
+                  <text text="  小视频" gravity="left" textSize="12" />
+                  <input id="wlkk2" gravity="left" text="" textSize="12sp" textSizeHint = "12sp"/>
+                  <text text=" 版本号:" gravity="left" id = "fff" textSize="10" />
+                  <text text="" gravity="left" textColor="#4fb3ff" id = "wlkkbb" textSize="10" lines="1" width="30"/>
+                  <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                    <img  id="Download2" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src="{{__ARG0__.logourl}}"/>
+                  </horizontal>
+                </horizontal>
+                <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+                <horizontal layout_width="match_parent">
+                  <View bg="{{__ARG0__.my_color}}" h="*" w="10" />
+                  <Switch id="sb" checked="" h="60" visibility="{{this.checkable ? 'visible' : 'gone'}}"/>
+                  <text text="3.刷宝" gravity="left" textSize="14" textColor = "#f2c900" />
+                  <text text="视频" gravity="left" textSize="12" />
+                  <input id="sb2" gravity="left" text="" textSize="12sp" textSizeHint = "12sp"/>
+                  <text text=" 版本号:" gravity="left" id = "fff" textSize="10"/>
+                  <text text="" gravity="left" textColor="#4fb3ff" id = "sbbb" textSize="10" />
+                  <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                    <img  id="Download4" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src="{{__ARG0__.logourl}}"/>
+                  </horizontal>
+                </horizontal>
+                <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+                <horizontal layout_width="match_parent">
+                  <View bg="{{__ARG0__.my_color}}" h="*" w="10" />
+                  <Switch id="bbsp" checked="" h="60"/>
+                  <text text="4.波波视频" gravity="left" textSize="14" textColor = "#f2c900" />
+                  <text text="视频" gravity="left" textSize="12" />
+                  <input id="bbsp2" gravity="left" text="" textSize="12sp" textSizeHint = "12sp"/>
+                  <text text=" 版本号:" gravity="left" id = "fff" textSize="10" />
+                  <text text="" gravity="left" textColor="#4fb3ff" id = "bbspbb" textSize="10" />
+                  <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                    <img  id="Download5" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src="{{__ARG0__.logourl}}"/>
+                  </horizontal>
+                </horizontal>
+                <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+                <horizontal layout_width="match_parent">
+                  <View bg="{{__ARG0__.my_color}}" h="*" w="10" />
+                  <Switch id="qls" checked="" h="60"/>
+                  <text text="5.趣铃声" gravity="left" textSize="14" textColor = "#f2c900" />
+                  <text text="视频" gravity="left" textSize="12" />
+                  <input id="qls2" gravity="left" text="" textSize="12sp" textSizeHint = "12sp"/>
+                  <text text=" 版本号:" gravity="left" id = "fff" textSize="10" />
+                  <text text="" gravity="left" textColor="#4fb3ff" id = "qlsbb" textSize="10" lines="1" width="30"/>
+                  <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                    <img  id="Download6" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src="{{__ARG0__.logourl}}"/>
+                  </horizontal>
+                </horizontal>
+                <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+                <horizontal layout_width="match_parent">
+                  <View bg="{{__ARG0__.my_color}}" h="*" w="10" />
+                  <Switch id="sdhz" checked="" h="60"/>
+                  <text text="6.闪电盒子" gravity="left" textSize="14" textColor = "#f2c900" />
+                  <text text="文章" gravity="left" textSize="12" />
+                  <input id="sdhz1" gravity="left" text="" textSize="12sp" textSizeHint = "12sp"/>
+                  <text text="  购物" gravity="left" textSize="12" />
+                  <input id="sdhz2" gravity="left" text="" textSize="12sp" textSizeHint = "12sp"/>
+                  <text text=" 版本号:" gravity="left" id = "fff" textSize="10" />
+                  <text text="" gravity="left" textColor="#4fb3ff" id = "sdhzbb" textSize="10" lines="1" width="30"/>
+                  <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                    <img  id="Download7" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src="{{__ARG0__.logourl}}"/>
+                  </horizontal>
+                </horizontal>
+                <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+                <horizontal layout_width="match_parent" h="0" w="0">
+                  <View bg="{{__ARG0__.my_color}}" h="*" w="10" />
+                  <Switch id="kqllq" checked="" h="60"/>
+                  <text text="8.快7浏览器" gravity="left" textSize="14" textColor = "#f2c900" />
+                  <text text="视频" gravity="left" textSize="12" />
+                  <input id="kqllq2" gravity="left" text="" textSize="12sp" textSizeHint = "12sp"/>
+                  <text text=" 版本号:" gravity="left" id="fff" textSize="10" />
+                  <text text="" gravity="left" textColor="#4fb3ff" id="kqllqbb" textSize="10" />
+                  <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                    <img  id="Download11" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src="{{__ARG0__.logourl}}"/>
+                  </horizontal>
+                </horizontal>
+                <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              </vertical>
+            </ScrollView>
+          </card>
+        </frame>
+        <frame>
+          <card id="card3" w="*" h="*" margin="10 5" cardCornerRadius="2dp" cardElevation="1dp" foreground="?selectableItemBackground">
+            <ScrollView layout_width="match_parent"  layout_gravity="center">
+              <vertical>
+                <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="0" text=" "/>
+                <horizontal layout_width="match_parent">
+                  <View bg="{{__ARG0__.my_color}}" h="*" w="10" />
+                  <Switch id="pddhb" checked="" h="60"/>
+                  <text text="1.拼多多" gravity="left" textSize="14" textColor = "#f2c900" />
+                  <text text="运行时长" gravity="left" textSize="12" />
+                  <input id="pddhb1" gravity="left" text="" textSize="12sp" textSizeHint = "12sp"/>
+                  <text text="小时 版本号:" gravity="left" textSize="10" />
+                  <text text="" gravity="left" textColor="#4fb3ff" id = "pddhbbb" textSize="10" />
+                  <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                    <img  id="Download73" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src="{{__ARG0__.logourl}}"/>
+                  </horizontal>
+                </horizontal>
+                <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" " id="pddhbfg"/>
+                <scroll padding="0" h="auto"  bg="{{__ARG0__.my_color}}" id="pddhbsz">
+                  <vertical marginLeft="10"  h="650" bg="#ffffff">
+                    <card w="*" h="auto"
+                                    cardElevation="2dp" gravity="center_vertical" marginBottom="5dp" >
+                      <vertical >
+                        <View bg="#F3F3F3" h="2" w="*"/>
+                        <text w="*" h="30" text="全局设置" textSize="12sp" textStyle="bold" bg="#ffffff" textColor="#666666" padding="15 5" gravity="center" layout_gravity="right|center" />
+                        <View bg="#F3F3F3" h="2" w="*"/>
+                        <vertical padding="8 0">
+                          <horizontal>
+                            <checkbox id="拼多多红包时间限制" checked="" text="多币红包时间限制:" textColor="#000000" textSize="12sp" />
+                            <input id="拼多多红包上限时间" text="" textSize="12sp" textColorHint="#4F4F4F" inputType="number" />
+                            <text text="秒" textColor="#000000" textSize="12sp" />
+                            <text text="等待超时则跳过(选填)" textColor="#4F4F4F" textSize="10sp" marginLeft="10" />
+                          </horizontal>
+                        </vertical>
+                      </vertical>
+                    </card>
+                  </vertical>
+                </scroll>
+                <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+                <horizontal layout_width="match_parent">
+                  <View bg="{{__ARG0__.my_color}}" h="*" w="10" />
+                  <Switch id="dyhb" checked="" h="60"/>
+                  <text text="2.抖音红包" gravity="left" textSize="14" textColor = "#f2c900" />
+                  <text text="运行时长" gravity="left" textSize="12" />
+                  <input id="dyhb1" gravity="left" text="" textSize="12sp" textSizeHint = "12sp"/>
+                  <text text="小时 版本号:" gravity="left" textSize="10" />
+                  <text text="" gravity="left" textColor="#4fb3ff" id = "dyhbbb" textSize="10" />
+                  <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                    <img  id="Download_dy" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src="{{__ARG0__.logourl}}"/>
+                  </horizontal>
+                </horizontal>
+                <scroll padding="0" h="auto"  bg="{{__ARG0__.my_color}}" id="dyhbsz">
+                  <vertical marginLeft="10"  h="650" bg="#ffffff">
+                    <card w="*" h="auto"
+                                    cardElevation="2dp" gravity="center_vertical">
+                      <vertical >
+                        <View bg="#F3F3F3" h="2" w="*"/>
+                        <text w="*" h="30" text="全局设置" textSize="12sp" textStyle="bold" bg="#ffffff" textColor="#666666" padding="15 5" gravity="center" layout_gravity="right|center" />
+                        <View bg="#F3F3F3" h="2" w="*"/>
+                        <vertical padding="8 0">
+                          <horizontal>
+                            <checkbox id="抖音是否抢红包" checked="" textColor="#000000" textSize="12sp" />
+                            <text text="红包:" textColor="#000000" textSize="12sp" />
+                            <checkbox id="抖音红包时间限制" textColor="#000000" textSize="12sp" checked="" h="0"/>
+                            <input id="抖音红包最大等待时长" text="" textSize="12sp" textColorHint="#4F4F4F" inputType="number" />
+                            <text text="秒" textColor="#000000" textSize="12sp" />
+                            <text text="等待超时则跳过(必填)" textColor="#4F4F4F" textSize="10sp" marginLeft="10" />
+                          </horizontal>
+                          <horizontal>
+                            <checkbox id="抖音是否抢福袋" checked="" textColor="#000000" textSize="12sp" />
+                            <text text="福袋:" textColor="#000000" textSize="12sp" />
+                            <checkbox id="抖音福袋时间限制" textColor="#000000" textSize="12sp" checked="" h="0"/>
+                            <input id="抖音福袋最大等待时长" text="" textSize="12sp" textColorHint="#4F4F4F" inputType="number" />
+                            <text text="秒" textColor="#000000" textSize="12sp" />
+                            <text text="等待超时则跳过(必填)" textColor="#4F4F4F" textSize="10sp" marginLeft="10" />
+                          </horizontal>
+                          <horizontal>
+                            <checkbox id="抖音狂暴模式" checked="" textColor="#000000" textSize="12sp" />
+                            <text text="极速模式" textColor="#000000" textSize="12sp" />
+                            <checkbox id="抖音付费福袋" checked="" textColor="#000000" textSize="12sp" />
+                            <text text="参与付费福袋" textColor="#000000" textSize="12sp" />
+                            <text text="付费福袋需支付1抖币" textColor="#4F4F4F" textSize="10sp" marginLeft="10" />
+                          </horizontal>
+                        </vertical>
+                      </vertical>
+                    </card>
+                  </vertical>
+                </scroll>
+                <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+                <horizontal layout_width="match_parent">
+                  <View bg="{{__ARG0__.my_color}}" h="*" w="10" />
+                  <Switch id="jrtthb" checked="" h="60"/>
+                  <text text="3.今日头条" gravity="left" textSize="14" textColor = "#f2c900" />
+                  <text text="单号时长" gravity="left" textSize="12" />
+                  <input id="jrtthb1" gravity="left" text="" textSize="12sp" textSizeHint = "12sp"/>
+                  <text text="小时 版本号:" gravity="left" id = "fff" textSize="10" />
+                  <text text="" gravity="left" textColor="#4fb3ff" id = "jrttbb" textSize="10" />
+                  <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                    <img  id="Download74" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src="{{__ARG0__.logourl}}"/>
+                  </horizontal>
+                </horizontal>
+                <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" " id="jrttfg"/>
+                <scroll padding="0" h="auto"  bg="{{__ARG0__.my_color}}" id="jrttsz">
+                  <vertical marginLeft="10"  h="650" bg="#ffffff">
+                    <card w="*" h="auto"
+                                    cardElevation="2dp" gravity="center_vertical" marginBottom="5dp">
+                      <vertical >
+                        <View bg="#F3F3F3" h="2" w="*"/>
+                        <Switch w="*" h="30"  id="抢红包" text="                《红包》" textSize="12sp" textStyle="bold" bg="#ffffff" textColor="#666666" checked=""  padding="15 5" gravity="center" layout_gravity="right|center" />
+                        <View bg="#F3F3F3" h="2" w="*"/>
+                        <vertical padding="8 0"  >
+                          <horizontal gravity="left">
+                            <text text="等待开奖时间" textColor="#000000" textSize="12sp" />
+                            <input id="红包上限sj" text="" textSize="12sp" textColorHint="#4F4F4F" inputType="number" />
+                            <text text="秒" textColor="#000000" textSize="12sp" />
+                            <text text="红包等待时间限制(选填)" textColor="#4F4F4F" textSize="10sp" marginLeft="10" />
+                          </horizontal>
+                          <horizontal>
+                            <text text="找寻红包时间:" textColor="#000000" textSize="12sp" />
+                            <input id="找寻红包sj" text="" textSize="12sp" textColorHint="#4F4F4F" inputType="number" />
+                            <text text="秒" textColor="#000000" textSize="12sp" />
+                            <text text="直播寻找红包时间(如无必要默认即可)" textColor="#4F4F4F" textSize="10sp" marginLeft="10" />
+                          </horizontal>
+                        </vertical>
+                        <View bg="#F3F3F3" h="2" w="*"/>
+                        <Switch w="*" h="30"  id="参与福袋" text="                《福袋》" textSize="12sp" textStyle="bold" bg="#ffffff" checked="" textColor="#666666" padding="15 5" gravity="center" layout_gravity="right|center" />
+                        <View bg="#F3F3F3" h="2" w="*"/>
+                        <vertical padding="8 0"  >
+                          <horizontal>
+                            <checkbox id="参与收费福袋" text="参与收费福袋" checked="" h="0" textColor="#000000" textSize="12sp" />
+                            <text text="福袋只参与免费的,收费则不参与(必选)" textColor="#4F4F4F" textSize="10sp" />
+                          </horizontal>
+                          <horizontal>
+                            <checkbox id="快速寻找" text="是否快速寻找" checked="" textColor="#000000" textSize="12sp" />
+                            <text text="(夜间福袋较少,可以选择快速寻找)" textColor="#4F4F4F" textSize="10sp" marginLeft="10" />
+                          </horizontal>
+                          <horizontal>
+                            <text text="福袋上限时间:" textColor="#000000" textSize="12sp" />
+                            <input id="福袋上限sj" text="" textSize="12sp" textColorHint="#4F4F4F" inputType="number" />
+                            <text text="秒" textColor="#000000" textSize="12sp" />
+                            <text text="福袋等待时间限制(选填)" textColor="#4F4F4F" textSize="10sp" marginLeft="10" />
+                          </horizontal>
+                          <horizontal>
+                            <text text="找福袋时间:" textColor="#000000" textSize="12sp" />
+                            <input id="找寻福袋sj" text="" textSize="12sp" textColorHint="#4F4F4F" inputType="number" />
+                            <text text="秒" textColor="#000000" textSize="12sp" />
+                            <text text="直播寻找福袋时间(如无必要默认即可)" textColor="#4F4F4F" textSize="10sp" marginLeft="10" />
+                          </horizontal>
+                        </vertical>
+                        <View bg="#F3F3F3" h="2" w="*"/>
+                        <Switch w="*" h="30"  id="头条是否多开模式" text="                《是否多开》" textSize="12sp" textStyle="bold" bg="#ffffff" checked="" textColor="#666666" padding="15 5" gravity="center" layout_gravity="right|center" />
+                        <View bg="#F3F3F3" h="2" w="*"/>
+                      </vertical>
+                    </card>
+                  </vertical>
+                </scroll>
+                <horizontal layout_width="match_parent">
+                  <View bg="{{__ARG0__.my_color}}" h="*" w="10" />
+                  <Switch id="yingke" checked="" h="60"/>
+                  <text text="3.映客直播" gravity="left" textSize="14" textColor = "#f2c900" />
+                  <text text="单号时长" gravity="left" textSize="12" />
+                  <input id="yingke1" gravity="left" text="" textSize="12sp" textSizeHint = "12sp"/>
+                  <text text="小时 版本号:" gravity="left" id = "fff" textSize="10" />
+                  <text text="" gravity="left" textColor="#4fb3ff" id = "yingkebb" textSize="10" />
+                  <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                    <img  id="Download87" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src="{{__ARG0__.logourl}}"/>
+                  </horizontal>
+                </horizontal>
+                <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+                <horizontal layout_width="match_parent">
+                  <View bg="{{__ARG0__.my_color}}" h="*" w="10" />
+                  <Switch id="fqmfxs" checked="" h="60"/>
+                  <text text="4.番茄免费小说" gravity="left" textSize="14" textColor = "#f2c900" />
+                  <text text="进入次数" gravity="left" textSize="12" />
+                  <input id="fqmfxs1" gravity="left" text="" textSize="12sp" textSizeHint = "12sp"/>
+                  <text text=" 版本号:" gravity="left" id = "fff" textSize="10" />
+                  <text text="" gravity="left" textColor="#4fb3ff" id = "fqmfxsbb" textSize="10" lines="1" width="30"/>
+                  <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                    <img  id="Download46" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src="{{__ARG0__.logourl}}"/>
+                  </horizontal>
+                </horizontal>
+                <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+                <horizontal layout_width="match_parent" h="0">
+                  <View bg="{{__ARG0__.my_color}}" h="*" w="10" />
+                  <Switch id="tys" checked="" h="60"/>
+                  <text text="5.淘元素" gravity="left" textSize="14" textColor = "#f2c900" />
+                  <text text="进入次数" gravity="left" textSize="12" />
+                  <input id="tys1" gravity="left" text="" textSize="12sp" textSizeHint = "12sp"/>
+                  <text text=" 版本号:" gravity="left" id = "fff" textSize="10" />
+                  <text text="" gravity="left" textColor="#4fb3ff" id = "tysbb" textSize="10" />
+                  <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                    <img  id="Download52" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src="{{__ARG0__.logourl}}"/>
+                  </horizontal>
+                </horizontal>
+                <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+                <horizontal layout_width="match_parent">
+                  <View bg="{{__ARG0__.my_color}}" h="*" w="10" />
+                  <Switch id="kgyydzb" checked="" h="60"/>
+                  <text text="5.酷狗音乐大字版" gravity="left" textSize="14" textColor = "#f2c900" />
+                  <text text="进入次数" gravity="left" textSize="12" />
+                  <input id="kgyydzb2" gravity="left" text="" textSize="12sp" textSizeHint = "12sp"/>
+                  <text text=" 版本号:" gravity="left" id = "fff" textSize="10" />
+                  <text text="" gravity="left" textColor="#4fb3ff" id = "kgyydzbbb" textSize="10" />
+                  <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                    <img  id="Download53" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src="{{__ARG0__.logourl}}"/>
+                  </horizontal>
+                </horizontal>
+                <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+                <horizontal layout_width="match_parent" h="0">
+                  <View bg="{{__ARG0__.my_color}}" h="*" w="10" />
+                  <Switch id="lz" checked="" h="60"/>
+                  <text text="7.绿洲" gravity="left" textSize="14" textColor = "#f2c900" />
+                  <text text="进入次数" gravity="left" textSize="12" />
+                  <input id="lz2" gravity="left" text="" textSize="12sp" textSizeHint = "12sp"/>
+                  <text text=" 版本号:" gravity="left" id = "fff" textSize="10" />
+                  <text text="" gravity="left" textColor="#4fb3ff" id = "lzbb" textSize="10" />
+                  <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                    <img  id="Download57" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src="{{__ARG0__.logourl}}"/>
+                  </horizontal>
+                </horizontal>
+                <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+                <horizontal layout_width="match_parent">
+                  <View bg="{{__ARG0__.my_color}}" h="*" w="10" />
+                  <Switch id="kgeg" checked="" h="60"/>
+                  <text text="6.酷狗儿歌" gravity="left" textSize="14" textColor = "#f2c900" />
+                  <text text="进入次数" gravity="left" textSize="12" />
+                  <input id="kgeg2" gravity="left" text="" textSize="12sp" textSizeHint = "12sp"/>
+                  <text text=" 版本号:" gravity="left" id = "fff" textSize="10" />
+                  <text text="" gravity="left" textColor="#4fb3ff" id = "kgegbb" textSize="10" lines="1" width="40"/>
+                  <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                    <img  id="Download65" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src="{{__ARG0__.logourl}}"/>
+                  </horizontal>
+                </horizontal>
+                <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+                <horizontal layout_width="match_parent">
+                  <View bg="{{__ARG0__.my_color}}" h="*" w="10" />
+                  <Switch id="bsxq" checked="" h="60"/>
+                  <text text="7.宝石星球" gravity="left" textSize="14" textColor = "#f2c900" />
+                  <text text="进入次数" gravity="left" textSize="12" />
+                  <input id="bsxq2" gravity="left" text="" textSize="12sp" textSizeHint = "12sp"/>
+                  <text text=" 版本号:" gravity="left" id = "fff" textSize="10" />
+                  <text text="" gravity="left" textColor="#4fb3ff" id = "bsxqbb" textSize="10" lines="1" width="40"/>
+                  <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                    <img  id="Download67" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src="{{__ARG0__.logourl}}"/>
+                  </horizontal>
+                </horizontal>
+                <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+                <horizontal layout_width="match_parent">
+                  <View bg="{{__ARG0__.my_color}}" h="*" w="10" />
+                  <Switch id="ysm" checked="" h="60"/>
+                  <text text="8.云扫码" gravity="left" textSize="14" textColor = "#f2c900" />
+                  <text text="文章" gravity="left" textSize="12" />
+                  <text text="(微信文章)" gravity="left" textSize="11" />
+                  <input id="ysm2" gravity="left" text="" textSize="12sp" textSizeHint = "12sp"/>
+                  <text text=" 版本号:" gravity="left" id = "fff" textSize="10" />
+                  <text text="" gravity="left" textColor="#4fb3ff" id = "ysmbb" textSize="10" />
+                  <horizontal layout_width="match_parent"  gravity="right" marginTop="8">
+                    <button id="Download66" bg="{{__ARG0__.my_color}}" color="#ffffff" text="复制" h="40" w="50" textSize="10sp" gravity="center"/>
+                  </horizontal>
+                </horizontal>
+                <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+                <horizontal layout_width="match_parent">
+                  <View bg="{{__ARG0__.my_color}}" h="*" w="10" />
+                  <Switch id="ddgl" checked="" h="60"/>
+                  <text text="9.多多果林" gravity="left" textSize="14" textColor = "#f2c900" />
+                  <text text="进入次数" gravity="left" textSize="12" />
+                  <input id="ddgl2" gravity="left" text="" textSize="12sp" textSizeHint = "12sp"/>
+                  <text id="ddglyq" text="邀请码" gravity="left" textSize="12" />
+                  <text text=" 版本号:" gravity="left" id = "fff" textSize="10" />
+                  <text text="" gravity="left" textColor="#4fb3ff" id = "ddglbb" textSize="10" lines="1" width="30"/>
+                  <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                    <img  id="Download71" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src="{{__ARG0__.logourl}}"/>
+                  </horizontal>
+                </horizontal>
+                <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+                <horizontal layout_width="match_parent" h="0">
+                  <View bg="{{__ARG0__.my_color}}" h="*" w="10" />
+                  <Switch id="hz" checked="" h="60"/>
+                  <text text="11.花赚" gravity="left" textSize="14" textColor = "#f2c900" />
+                  <text text="进入次数" gravity="left" textSize="12" />
+                  <input id="hz2" gravity="left" text="" textSize="12sp" textSizeHint = "12sp"/>
+                  <text  id="hzyq" text="邀请码" gravity="left" textSize="12" />
+                  <text text=" 版本号:" gravity="left" id = "fff" textSize="10" />
+                  <text text="" gravity="left" textColor="#4fb3ff" id = "hzbb" textSize="10" lines="1" width="30"/>
+                  <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                    <img  id="Download72" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src="{{__ARG0__.logourl}}"/>
+                  </horizontal>
+                </horizontal>
+                <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+                <horizontal layout_width="match_parent">
+                  <View bg="{{__ARG0__.my_color}}" h="*" w="10" />
+                  <Switch id="myb" checked="" h="60"/>
+                  <text text="12.蚂蚁帮" gravity="left" textSize="14" textColor = "#f2c900" />
+                  <text text="文章" gravity="left" textSize="12" />
+                  <text text="(微信文章)" gravity="left" textSize="11" />
+                  <input id="myb2" gravity="left" text="" textSize="12sp" textSizeHint = "12sp"/>
+                  <text text=" 版本号:" gravity="left" id = "fff" textSize="10" />
+                  <text text="" gravity="left" textColor="#4fb3ff" id = "mybbb" textSize="10" />
+                  <horizontal layout_width="match_parent"  gravity="right" marginTop="17">
+                    <img  id="Download68" h="28" w="28" marginRight="10" layout_gravity="right" scaleType="fitXY" src="{{__ARG0__.logourl}}"/>
+                  </horizontal>
+                </horizontal>
+                <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+              </vertical>
+            </ScrollView>
+          </card>
+        </frame>
+        <frame>
+          <text text="第四页内容" textColor="green" textSize="16sp"/>
+        </frame>
+      </viewpager>
+    </vertical>
+    <vertical layout_gravity="left" bg="#ffffff" w="300">
+      <img w="*" h="120" scaleType="fitXY" src="{{__ARG0__.logourl}}" />
+      <ScrollView layout_width="match_parent">
+        <vertical>
+          <horizontal h="40">
+            <text bg="#f2f2f2" w="1" h="40" text=" "/>
+            <button layout_weight="2" h="40" id="Re_Btn" text="重置文章记录" textStyle = "bold" textColor="#FFFFFF" bg="{{__ARG0__.my_color}}"/>
+            <text bg="#f2f2f2" w="1" h="40" text=" "/>
+            <button layout_weight="2" h="40" id="Re_Btn2" text="重置提现记录" textStyle = "bold" textColor="#FFFFFF" bg="{{__ARG0__.my_color}}"/>
+            <text bg="#f2f2f2" w="1" h="40" text=" "/>
+          </horizontal>
+          <horizontal>
+            <text text="无障碍(必选)"  textSize="12sp" textColor="#333333"  minWidth="255" padding="10 0" layout_gravity="center"/>
+            <Switch id="autoService" checked="{{auto.service != null}}"  switchMinWidth="50sp" layout_gravity="right|bottom" h="40"/>
+          </horizontal>
+          <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+          <horizontal h="40">
+            <text text="清理SD卡"  textSize="13sp"  minWidth="255" padding="10 0" layout_gravity="center"/>
+            <Switch id="清理内存" checked=""  switchMinWidth="50sp" layout_gravity="right|bottom" h="40"/>
+          </horizontal>
+          <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+          <horizontal h="40">
+            <text text="深度清理"  textSize="13sp"  minWidth="255" padding="10 0" layout_gravity="center"/>
+            <Switch id="深度清理" checked="" switchMinWidth="50sp" layout_gravity="right|bottom" h="40" />
+          </horizontal>
+          <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+          <horizontal h="40">
+            <text text="自动提现"  textSize="13sp"  minWidth="250" padding="10 0" layout_gravity="center"/>
+            <Switch id="自动提现" checked="" switchMinWidth="50sp" layout_gravity="right|bottom" h="40" />
+          </horizontal>
+          <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+          <horizontal h="40">
+            <text text="本地打码" textSize="13sp"  minWidth="250" padding="10 0" layout_gravity="center"/>
+            <Switch  id="本地打码" checked="" switchMinWidth="50sp" layout_gravity="right|bottom" h="40" />
+          </horizontal>
+          <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+          <horizontal h="40">
+            <text text="微信养号" textSize="13sp" padding="10 0" layout_gravity="center"/>
+            <input id="wxyhjg" text="" textSize="12sp"  layout_gravity="center"/>
+            <text text="分钟，运行一次" textSize="13sp" padding="10 0" layout_gravity="center" minWidth="150"/>
+            <Switch id="wxyh" checked="" switchMinWidth="50sp" layout_gravity="right|bottom" h="40" />
+          </horizontal>
+          <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+          <horizontal h="40">
+            <text text="短视频养号  点击设置"  textSize="13sp" id="DSPyanghao"   minWidth="250" padding="10 0" layout_gravity="center"/>
+            <Switch id="dspyh" checked="" switchMinWidth="50sp" layout_gravity="right|bottom" h="40" />
+          </horizontal>
+          <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+          <horizontal h="40">
+            <text text="自动传(D音/K手)每日" textSize="10sp" paddingLeft="10" layout_gravity="center" />
+            <input id="zpcs" text="" textSize="10sp" />
+            <text text="作品" textSize="10sp" layout_gravity="center" />
+            <spinner id="spzdsczp" entries="下载上传|拍摄上传" textSize="10sp" textColor="#F68D06" marginTop="1" gravity="center"/>
+            <Switch  id="自动上传作品" checked="" switchMinWidth="50sp" layout_gravity="right|bottom" h="40" />
+          </horizontal>
+          <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+          <horizontal h="40">
+            <text text="看直播养号,每次观看" textSize="10sp" padding="10 0" layout_gravity="center" />
+            <input id="kzbsj" text="" textSize="10sp" layout_gravity="center"/>
+            <text text="分钟" textSize="10sp" padding="10 0" layout_gravity="center"  minWidth="115"/>
+            <Switch  id="观看直播时间" checked="" switchMinWidth="50sp" layout_gravity="right|bottom" h="40" />
+          </horizontal>
+          <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+          <horizontal h="40">
+            <text text="取消关注,每天取消" textSize="10sp" paddingLeft="10" layout_gravity="center" />
+            <input id="qxgzcs" text="" textSize="10sp" />
+            <text text="关注" textSize="10sp" layout_gravity="center" />
+            <spinner id="qxgzlx" entries="D音和K手|D音|K手" textSize="10sp" w="115"/>
+            <Switch  id="自动取消关注" checked=""  switchMinWidth="50sp" layout_gravity="right|bottom" h="40" />
+          </horizontal>
+          <text padding="10 20 30 40" bg="#f2f2f2" w="*" h="3sp" text=" "/>
+          <horizontal  w="0" h="0">
+            <button id="手动代码" text="手动更新云脚本"  textStyle = "bold" textColor="#FFFFFF" bg="#0000FF" />
+            <button layout_weight="2" id="手动更新" text="手动更新内框架" textStyle = "bold" textColor="#FFFFFF" bg="#CDC9A5" />
+          </horizontal>
+        </vertical>
+      </ScrollView>
+    </vertical>
+  </drawer>
+</frame>
