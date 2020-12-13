@@ -1,13 +1,12 @@
-import { registerAs } from "@nestjs/config";
-import { ConnectionOptions } from "typeorm";
-import { redisBaseConfig } from "./base.config";
-
+import { registerAs } from '@nestjs/config';
+import { ConnectionOptions } from 'typeorm';
+import { RedisOptions } from 'ioredis';
 //   配置
 const jwt = {
-  secret: "your", // 密钥
-  adminSecret: "your", // 后台用户的密钥
+  secret: 'your', // 密钥
+  adminSecret: 'your', // 后台用户的密钥
   enable: true, // 开启
-  match: "/jwt", // 白名单
+  match: '/jwt', // 白名单
 
   // jwt 额外配置, 我自己拓展的
   extras: {
@@ -23,27 +22,26 @@ const jwt = {
 };
 
 // redis 配置 [ 后面如果需要对某一业务进行缓存的时候，可以开启多实例来进行特定储存 ]
-const redisConfig = {
-  client: {
-    ...redisBaseConfig,
-    db: "5",
-  },
-  agent: true,
+export const redisConfig: RedisOptions = {
+  host: process.env.redisHost || '127.0.0.1',
+  port: Number(process.env.redisPort) || 6379,
+  // password: 'root',
+  db: 1,
 };
 
 const ormConfig: ConnectionOptions = {
-  type: "mysql", // support: mysql, mariadb, postgres, mssql
-  charset: "utf8mb4", // 字符集
+  type: 'mysql', // support: mysql, mariadb, postgres, mssql
+  charset: 'utf8mb4', // 字符集
   connectTimeout: 12000,
   // 当在数据库中处理一个大数(BIGINT和DECIMAL)数据类型的时候，你需要启用这个选项(默认: false)
   supportBigNumbers: true,
   // 这个选项需要 bigNumberStrings 与 supportBigNumbers 同时启用
   // 强制把数据库中大数(BIGINT和DECIMAL)数据类型的值转换为 javascript 字符对象串对象返回。(默认:false)
   bigNumberStrings: true,
-  timezone: "+08:00", // 东八时区
+  timezone: '+08:00', // 东八时区
 };
 
-export default registerAs("database", () => ({
+export default registerAs('database', () => ({
   // redis 配置 [ 后面如果需要对某一业务进行缓存的时候，可以开启多实例来进行特定储存 ]
   jwt,
   redisConfig,

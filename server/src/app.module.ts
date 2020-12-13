@@ -5,11 +5,11 @@ import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 
 /** common */
 import { ApiParamsValidationPipe } from './common/pipes/api-params-validation.pipe';
-import { LoggerMiddleware } from './common/middleware/LoggerMiddleware';
+import { LoggerMiddleware } from './common/middleware/logger.middleware';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
+import { AnyExceptionFilter } from '@common/filters/any-exception.filter';
 import { LoggingInterceptor } from './common/interceptors/Logging.interceptor';
-import { TransformInterceptor } from './common/interceptors/transform.interceptor';
-
+import { ValidationPipe } from './common/pipes/validation.pipe'
 /** common */
 
 /** module */
@@ -18,6 +18,7 @@ import { RasModule } from './modules/ras/ras.module';
 import { orm } from './modules/database/database.module';
 import { AuthModule } from '@modules/auth/auth.module';
 import { UserModule } from '@modules/user/user.module';
+import { TransformInterceptor } from '@common/interceptors/transform.interceptor';
 
 /** module */
 @Module({
@@ -27,11 +28,19 @@ import { UserModule } from '@modules/user/user.module';
     AppService,
     {
       provide: APP_FILTER,
-      useClass: HttpExceptionFilter,
+      useClass: AnyExceptionFilter,
     },
     {
+      provide: APP_FILTER,
+      useClass: HttpExceptionFilter,
+    },
+    // {
+    //   provide: APP_PIPE,
+    //   useClass: ApiParamsValidationPipe,
+    // },
+    {
       provide: APP_PIPE,
-      useClass: ApiParamsValidationPipe,
+      useClass: ValidationPipe,
     },
     {
       provide: APP_INTERCEPTOR,
@@ -39,12 +48,12 @@ import { UserModule } from '@modules/user/user.module';
     },
     {
       provide: APP_INTERCEPTOR,
-      useClass: TransformInterceptor,
-    },
+      useClass: TransformInterceptor
+    }
   ],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LoggerMiddleware).forRoutes('user');
+    consumer.apply(LoggerMiddleware).forRoutes('*');
   }
 }

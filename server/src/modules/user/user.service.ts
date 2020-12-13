@@ -1,4 +1,11 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import {
+  Injectable,
+  HttpException,
+  HttpStatus,
+  BadRequestException,
+  Inject,
+  forwardRef,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ApiException } from '../../common/exceptions/api.exception';
@@ -18,40 +25,38 @@ import { User } from './models/user.entity';
 import { CreateUserDto, UpdatePasswordUserDto } from './dtos/index.user.dto';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
+import { AuthService } from '@modules/auth/auth.service';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
-    private configService: ConfigService,
-    private jwtService: JwtService,
+    private readonly configService: ConfigService,
+    @Inject(forwardRef(() => AuthService))
+    private readonly authService: AuthService,
+    private readonly jwtService: JwtService,
   ) {
     this.init();
   }
 
   public init() {
-    const { name, password } = this.configService.get('base').admin;
+    const { userName, password } = this.configService.get('base').admin;
 
-    this.createUser({
-      name,
+    this.addUser({
+      userName,
       password,
-      role: 'admin',
+      role: 0,
     }).subscribe(
       function next(_) {
-        console.log();
         console.log(
-          `管理员账户创建成功，用户名：${name}，密码：${password}，请及时登录系统修改默认密码`,
+          `管理员账户创建成功，用户名：${userName}，密码：${password}，请及时登录系统修改默认密码`,
         );
-        console.log();
       },
       function error(_) {
-        console.log();
         console.log(
-          `管理员账户已经存在，用户名：${name}，密码：${password}，请及时登录系统修改默认密码`,
+          `管理员账户已经存在，用户名：${userName}，密码：${password}，请及时登录系统修改默认密码`,
         );
-
-        console.log();
       },
     );
   }
@@ -84,17 +89,26 @@ export class UserService {
    * 创建用户
    * @param user
    */
-  public createUser(user) {
-    const { name } = user;
-    return from(this.userRepository.findOne({ where: { name } })).pipe(
+  public createUser(user: any) {
+    const { password, repassword } = user;
+    if (password !== repassword) {
+      // throw new HttpException('两次密码输入不一致', HttpStatus.BAD_REQUEST);
+      return {
+        code: 400,
+        msg: '两次密码输入不一致',
+      };
+    }
+    return this.addUser(user);
+  }
+
+  public addUser(user: any) {
+    const { userName } = user;
+    return from(this.userRepository.findOne({ where: { userName } })).pipe(
       concatMap(existUser => {
         if (existUser) {
-          throw new ApiException(
-            '用户已存在',
-            ApiErrorCode.USER_NAME_INVALID,
-            HttpStatus.OK,
-          );
+          throw new HttpException('用户已存在', HttpStatus.BAD_REQUEST);
         }
+        delete user.repassword;
         const newUser = this.userRepository.create(user);
         return this.userRepository.save(newUser);
       }),
@@ -109,30 +123,25 @@ export class UserService {
    * @param user
    * 此无法没有catchError, 必须再下游捕获错误。
    */
-  public login(user: Partial<User>) {
-    const { name, password } = user;
-    return from(this.userRepository.findOne({ where: { name } })).pipe(
-      concatMap(existUser => {
-        if (!existUser) {
-          throw new HttpException(`用户不存在`, HttpStatus.BAD_REQUEST);
-        } else {
-          return combineLatest([
-            from(User.comparePassword(password, existUser.password)),
-            of(existUser),
-          ]);
+  public login(user: any) {
+    const { userName, password } = user;
+    console.log('JWT验证 - Step 1: 用户请求登录');
+    return this.authService.validateUser(userName, password).pipe(
+      switchMap(({ code, user }) => {
+        switch (code) {
+          case 0:
+            throw new HttpException(
+              `用户已锁定，无法登录`,
+              HttpStatus.BAD_REQUEST,
+            );
+          case 1:
+            const result = this.authService.certificate(user);
+            return result;
+          case 2:
+            throw new HttpException(`密码错误`, HttpStatus.BAD_REQUEST);
+          default:
+            throw new HttpException(`用户不存在`, HttpStatus.BAD_REQUEST);
         }
-      }),
-      map(([isSame, existUser]) => {
-        if (!isSame) {
-          throw new HttpException(`密码错误`, HttpStatus.BAD_REQUEST);
-        }
-        if (existUser.status == 'locked') {
-          throw new HttpException(
-            `用户已锁定，无法登录`,
-            HttpStatus.BAD_REQUEST,
-          );
-        }
-        return existUser;
       }),
     );
   }
@@ -147,6 +156,10 @@ export class UserService {
   public currentUser(token) {
     const { id } = this.jwtService.decode(token) as Partial<User>;
     return this.userRepository.findOne(id);
+  }
+
+  public findOne(where: any) {
+    return this.userRepository.findOne({ where });
   }
 
   /**
@@ -181,10 +194,10 @@ export class UserService {
             HttpStatus.BAD_REQUEST,
           );
         }
-        return combineLatest(
+        return combineLatest([
           from(User.comparePassword(oldPassword, existUser.password)),
           of(existUser),
-        );
+        ]);
       }),
       switchMap(([isSame, existUser]) => {
         if (!isSame) {

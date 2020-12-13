@@ -11,6 +11,7 @@ import {
   Request,
   UseGuards,
   Headers,
+  HttpException,
 } from '@nestjs/common';
 
 import { UserService } from './user.service';
@@ -22,6 +23,8 @@ import {
   UpdatePasswordUserDto,
 } from './dtos/index.user.dto';
 import { Request as Req } from 'express';
+import { LoginDto } from './dtos/login.dto';
+import { roleConstans } from '@modules/auth/constants';
 
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('user')
@@ -30,14 +33,17 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post('a')
-  @Roles('visitor')
-  @HttpCode(HttpStatus.CREATED)
-  findOne(@Body() user: CreateUserDto) {
-    return user;
+  @Roles(2)
+  @UseGuards(JwtAuthGuard)
+  /**
+   * a
+   */
+  public a(@Body() a) {
+    return 323232;
   }
 
   @Get()
-  @Roles('admin')
+  @Roles(roleConstans.DEVELOPER)
   @UseGuards(JwtAuthGuard)
   public findAll(@Query() query) {
     return this.userService.findAll(query);
@@ -54,6 +60,12 @@ export class UserController {
   @HttpCode(HttpStatus.CREATED)
   public register(@Body() user: CreateUserDto) {
     return this.userService.createUser(user);
+  }
+
+  @Post('login')
+  @HttpCode(HttpStatus.OK)
+  public login(@Body() user: LoginDto) {
+    return this.userService.login(user);
   }
 
   @Post('update')

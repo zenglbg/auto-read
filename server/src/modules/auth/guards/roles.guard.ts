@@ -3,12 +3,15 @@ import {
   SetMetadata,
   CanActivate,
   ExecutionContext,
+  ForbiddenException,
+  UnauthorizedException,
 } from '@nestjs/common';
 
 import { JwtService } from '@nestjs/jwt';
 import { Reflector } from '@nestjs/core';
+import { RedisInstance } from '@modules/database/redis';
 
-export const Roles = (...roles: string[]) => SetMetadata('roles', roles);
+export const Roles = (role: number) => SetMetadata('role', role);
 
 @Injectable()
 export class RolesGuard implements CanActivate {
@@ -17,27 +20,38 @@ export class RolesGuard implements CanActivate {
     private readonly reflector: Reflector,
   ) {}
 
-  public canActivate(context: ExecutionContext) {
-    const roles = this.reflector.get<string[]>('roles', context.getHandler());
+  public async canActivate(context: ExecutionContext) {
+    const role = this.reflector.get<number[]>('role', context.getHandler());
 
-    if (!roles) {
-      return true;
+    if (typeof role === 'number') {
+      const request = context.switchToHttp().getRequest();
+      const authorization = request['headers'].authorization || void 0;
+      const token = authorization.split(' ')[1]; // authorization: Bearer xxx
+      if (token) {
+        const user = this.jwtService.decode(token) as any;
+
+        // 获取 redis 里缓存的 token
+        const redis = await RedisInstance.initRedis(
+          'TokenGuard.canActivate',
+          0,
+        );
+        const key = `${user.sub}-${user.userName}`;
+        const cache = await redis.get(key);
+        if (token !== cache) {
+          // 如果 token 不匹配，禁止访问
+          throw new UnauthorizedException('您的账号在其他地方登录，请重新登录');
+        }
+
+        // console.log(`user, role`, user, role);
+        if (user && user.role > role) {
+          throw new ForbiddenException('对不起，您无权操作');
+        }
+      } else {
+        // 如果 token 不匹配，禁止访问
+        throw new UnauthorizedException('无权限访问');
+      }
     }
 
-    const request = context.switchToHttp().getRequest();
-
-    let token = request.headers.token;
-    // console.log(token);
-    if (/Bearer/.test(token)) {
-      /**
-       * 不需要 Bearer ，否则验证失败
-       */
-      token = token.split(' ').pop();
-    }
-
-    const user = this.jwtService.decode(token) as any;
-    const hasRole = user && roles.some(role => role === user.role);
-    // console.log(user, `user`, roles, user && user.role && hasRole);
-    return user && user.role && hasRole;
+    return true;
   }
 }

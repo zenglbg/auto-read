@@ -2,7 +2,7 @@ import { stringify } from 'querystring';
 import { history, Reducer, Effect } from 'umi';
 
 import { fakeAccountLogin } from '@/services/login';
-import { setAuthority } from '@/utils/authority';
+import { saveUserToken, setAuthority } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
 import { message } from 'antd';
 
@@ -33,9 +33,10 @@ const Model: LoginModelType = {
 
   effects: {
     *login({ payload }, { call, put }) {
+      const { userName, password } = payload;
       const response = yield call(fakeAccountLogin, {
-        name: payload.userName,
-        password: payload.password,
+        userName,
+        password,
       });
       console.log(response);
       yield put({
@@ -81,16 +82,16 @@ const Model: LoginModelType = {
   reducers: {
     changeLoginStatus(state, { payload }) {
       if (payload) {
-        payload && setAuthority(payload.role);
-        localStorage.token = payload && payload.token;
+        setAuthority(payload.role);
+        saveUserToken(payload.token);
         return {
           ...state,
-          status: payload ? 'ok' : 'error',
+          status: 'ok',
           // type: payload.type,
         };
       }
 
-      return { ...state };
+      return { ...state, status: 'error' };
     },
   },
 };

@@ -4,8 +4,9 @@
  */
 import { extend } from 'umi-request';
 import { history } from 'umi';
+import jwt_decode from 'jwt-decode';
 import { notification } from 'antd';
-import { getUserToken } from './authority';
+import { getUserToken, saveUserToken, clearAuthority } from './authority';
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -52,12 +53,58 @@ const errorHandler = (error: { response: Response }): Response => {
  */
 const request = extend({
   errorHandler, // 默认错误处理
-  prefix: "/api",
+  prefix: '/api',
   credentials: 'include', // 默认请求是否带上cookie
 });
+
+// request.interceptors.request.use((url, options) => {
+//   const token = getUserToken();
+//   if (token) {
+//     //如果有token 就走token逻辑
+//     const headers = {
+//       Authorization: `Bearer ${token}`,
+//     };
+//     //如果是刷新token接口，就直接过，不要拦截它！！！
+//     if (url === '/weiqinketop/api/account/login/getnewtoken') {
+//       return {
+//         url: url,
+//         options: { ...options, headers },
+//       };
+//     }
+//     /**
+//      * @todo
+//      * 解析token
+//      * 如果token过期，而且延期token也过去了，那么，清空你的数据，直接返回登录，不允许操作了
+//      * 只是过期了，那就去拿新的token
+//      */
+
+//     return {
+//       url: url,
+//       options: { ...options, headers },
+//     };
+//   }
+//   return {
+//     url,
+//     options,
+//   };
+// });
+
 request.interceptors.request.use((url, options) => {
-  (options.headers as any).token = getUserToken();
-  return { url, options };
+  const token = getUserToken();
+  if (token) {
+    //如果有token 就走token逻辑
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+    return {
+      url: url,
+      options: { ...options, headers },
+    };
+  }
+  return {
+    url: url,
+    options: options,
+  };
 });
 request.interceptors.response.use((response) => {
   if (response.status === 401) {
@@ -67,7 +114,7 @@ request.interceptors.response.use((response) => {
     if (res.success) {
       return res.data;
     }
-    return res
+    return res;
   });
 });
 

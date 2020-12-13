@@ -4,6 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import * as rateLimit from 'express-rate-limit';
 import * as compression from 'compression';
 import * as helmet from 'helmet';
+import { logger } from '@common/middleware/logger.middleware'
 
 
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
@@ -58,6 +59,8 @@ async function bootstrap() {
   app.use(helmet());
 
   build(app);
+
+  
   /**
    * 全局中间件
    */

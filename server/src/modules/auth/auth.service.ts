@@ -1,58 +1,82 @@
-import { Injectable } from '@nestjs/common';
+import { verifyBcrypt } from '@common/utils/cryptogram';
+import { encryptPassword } from '@common/utils/cryptogram';
+import { UserService } from '@modules/user/user.service';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { User } from '../user/models/user.entity';
-import { UserService } from '../user/user.service';
-import { of, throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
-import { exist } from '@hapi/joi';
-
+import { from } from 'rxjs';
+import { concatMap, map } from 'rxjs/operators';
+import { RedisInstance } from '@modules/database/redis';
 @Injectable()
 export class AuthService {
   constructor(
+    @Inject(forwardRef(() => UserService))
     private readonly userService: UserService,
-    /**
-     * 注入jwtService
-     */
     private readonly jwtService: JwtService,
   ) {}
-
-  public createToken(user: Partial<User>) {
-    return this.jwtService.sign(user);
-  }
-
-  public login(user: Partial<User>) {
-    return this.userService.login(user).pipe(
-      map(data => {
-        const { id, name, email, role } = data;
-        const token = this.createToken({ id, name, email, role });
-        if (token) {
-          return Object.assign(data, { token });
+  // JWT验证 - Step 2: 校验用户信息
+  validateUser(userName: string, password: string) {
+    console.log('JWT验证 - Step 2: 校验用户信息');
+    return from(this.userService.findOne({ userName })).pipe(
+      map(user => {
+        if (user) {
+          if (user.status === 'locked') {
+            return {
+              code: 0,
+              user: null,
+            };
+          }
+          const hashedPassword = user.password;
+          const salt = user.password_salt;
+          const hashPassword = encryptPassword(password, salt);
+          if (verifyBcrypt(hashPassword, hashedPassword)) {
+            return {
+              // 密码正确
+              code: 1,
+              user,
+            };
+          } else {
+            // 密码错误
+            return {
+              code: 2,
+              user: null,
+            };
+          }
+        } else {
+          // 查无此人
+          return {
+            code: 3,
+            user: null,
+          };
         }
-        return data;
-      }),
-      catchError(err => {
-        return throwError(err);
       }),
     );
   }
 
-  public isAdmin(token: string) {
-    if (/Bearer/.test(token)) {
-      // 不需要 Bearer，否则验证失败
-      token = token.split(' ').pop();
-    }
+  public async certificate(user: any) {
+    /**
+     * JWT验证 - Step 3: 处理 jwt 签证
+     */
+    const { userName, id, role } = user;
+    const payload = {
+      userName,
+      sub: id,
+      role,
+    };
+    console.log('JWT验证 - Step 3: 处理 jwt 签证', payload);
 
     try {
-      const { id } = this.jwtService.decode(token) as Partial<User>;
-      return this.userService
-        .findByid(id)
-        .pipe(map(user => id && user.role === 'admin'));
+      const token = this.jwtService.sign(payload);
+      // 实例化 redis
+      const redis = await RedisInstance.initRedis('auth.certificate', 0);
+      // 将用户信息和 token 存入 redis，并设置失效时间，语法：[key, seconds, value]
+      await redis.setex(`${id}-${userName}`, 300, `${token}`);
+      return token;
     } catch (error) {
-      return of(false);
+      console.log(`注册token 发生了错误`, error);
+      return {
+        code: 600,
+        msg: `账号或密码错误`,
+      };
     }
-  }
-
-  public validateUser(payload: User) {
-    return this.userService.findByid(payload.id);
   }
 }

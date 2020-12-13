@@ -21,7 +21,6 @@ export const orm = (): DynamicModule => {
         synchronize: !!Number(envConfig.DATABASE_SYNCHRONIZE),
         logging: !!Number(envConfig.DATABASE_LOGGING),
       }
-      console.log(databaseConfig,`databaseConfig`)
       return databaseConfig
     },
     inject: [ConfigService],

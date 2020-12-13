@@ -31,8 +31,12 @@ export function setAuthority(authority: string | string[]): void {
   reloadAuthorized();
 }
 
-
-
 export function getUserToken() {
-  return localStorage.getItem('token') || '';
+  return localStorage.getItem('x-auth-token') || '';
+}
+export function saveUserToken(token: string) {
+  return localStorage.setItem('x-auth-token', token);
+}
+export function clearAuthority() {
+  return localStorage.clear();
 }

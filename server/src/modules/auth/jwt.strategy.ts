@@ -1,27 +1,20 @@
-import { Strategy, ExtractJwt } from 'passport-jwt';
+import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
-import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { User } from '../user/models/user.entity';
-import { map, catchError } from 'rxjs/operators';
+import { Injectable } from '@nestjs/common';
+import { jwtConstants } from './constants';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(private readonly authService: AuthService) {
+  constructor() {
     super({
-      jwtFromRequest: ExtractJwt.fromHeader('token'),
-      secretOrKey: 'lbg',
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      ignoreExpiration: false,
+      secretOrKey: jwtConstants.secret,
     });
   }
-
-  validate(payload: User) {
-    return this.authService.validateUser(payload).pipe(
-      map(user => {
-        if (!user) {
-          throw new UnauthorizedException('身份验证失败');
-        }
-        return user;
-      }),
-    );
+  // JWT验证 - Step 4: 被守卫调用
+  async validate(payload: any) {
+    console.log(`JWT验证 - Step 4: 被守卫调用`, payload);
+    return { id: payload.sub, userName: payload.username, realName: payload.realName, role: payload.role };
   }
 }
