@@ -5,6 +5,7 @@ import { AuthModule } from '../auth/auth.module';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
 import { User } from './models/user.entity';
+import { RasModule } from '@modules/ras/ras.module';
 
 @Module({
   imports: [

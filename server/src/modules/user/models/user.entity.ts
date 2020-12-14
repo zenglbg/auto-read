@@ -1,9 +1,10 @@
-import { Column, Entity, BeforeInsert } from 'typeorm';
+import { Column, Entity, BeforeInsert, OneToMany } from 'typeorm';
 import { Exclude } from 'class-transformer';
 import { createBcrypt, verifyBcrypt } from '@utils/cryptogram';
 import { Base } from '@entity/base.entity';
 import { Profile } from '@entity/profile.entity';
 import { encryptPassword, makeSalt } from '@common/utils/cryptogram';
+import { RasEntity } from '@modules/ras/models/ras.entity';
 @Entity({
   name: 'users',
 })
@@ -49,7 +50,6 @@ export class User extends Base {
   @Column({ length: 50, default: null })
   email: string; // 邮箱
 
-
   @Column({
     type: 'tinyint',
     default: 3,
@@ -63,4 +63,10 @@ export class User extends Base {
 
   @Column({ type: 'text', default: null })
   phone: string;
+
+  @OneToMany(
+    _ => RasEntity,
+    ras => ras.user,
+  )
+  ras: Array<RasEntity>;
 }

@@ -9,7 +9,7 @@ import { LoggerMiddleware } from './common/middleware/logger.middleware';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { AnyExceptionFilter } from '@common/filters/any-exception.filter';
 import { LoggingInterceptor } from './common/interceptors/Logging.interceptor';
-import { ValidationPipe } from './common/pipes/validation.pipe'
+import { ValidationPipe } from './common/pipes/validation.pipe';
 /** common */
 
 /** module */
@@ -19,10 +19,18 @@ import { orm } from './modules/database/database.module';
 import { AuthModule } from '@modules/auth/auth.module';
 import { UserModule } from '@modules/user/user.module';
 import { TransformInterceptor } from '@common/interceptors/transform.interceptor';
+import { PlatformModule } from './modules/platform/platform.module';
 
 /** module */
 @Module({
-  imports: [configModule(), orm(), AuthModule, UserModule, RasModule],
+  imports: [
+    configModule(),
+    orm(),
+    AuthModule,
+    UserModule,
+    RasModule,
+    PlatformModule,
+  ],
   controllers: [AppController],
   providers: [
     AppService,
@@ -48,8 +56,8 @@ import { TransformInterceptor } from '@common/interceptors/transform.interceptor
     },
     {
       provide: APP_INTERCEPTOR,
-      useClass: TransformInterceptor
-    }
+      useClass: TransformInterceptor,
+    },
   ],
 })
 export class AppModule {

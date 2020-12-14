@@ -12,18 +12,15 @@ interface IUserEditorProps {
 
 const UserEditor: React.FunctionComponent<IUserEditorProps> = ({ user, setUser, reload }) => {
   const onFinish = async (values: any) => {
-    console.log(values);
     if (user.id) {
-      console.log(`升级`);
       const res = await update({ ...values, id: user.id });
     } else {
-      console.log(`注册`);
       const res = await register(values);
     }
-    reload();
     setUser(undefined);
+    reload();
   };
-
+  console.log(user, user.id);
   return (
     <Modal visible={true} onCancel={() => setUser(undefined)}>
       <ProCard title="编辑用户" headerBordered>
@@ -87,45 +84,49 @@ const UserEditor: React.FunctionComponent<IUserEditorProps> = ({ user, setUser, 
               ]}
             />
           </StepsForm.StepForm>
-          <StepsForm.StepForm title="密码">
-            <ProFormText.Password
-              label="密码"
-              name="password"
-              rules={[
-                {
-                  required: true,
-                  message: '密码不能为空',
-                },
-                {
-                  min: 6,
-                  message: '密码长度不能少于6',
-                },
-              ]}
-            />
-            <ProFormText.Password
-              label="确认密码"
-              name="repassword"
-              dependencies={['password']}
-              rules={[
-                {
-                  required: true,
-                  message: '密码不能为空',
-                },
-                {
-                  min: 6,
-                  message: '密码长度不能少于6',
-                },
-                ({ getFieldValue }) => ({
-                  validator(rule, value) {
-                    if (!value || getFieldValue('password') === value) {
-                      return Promise.resolve();
-                    }
-                    return Promise.reject('您输入的两个密码不匹配');
+
+          {user.id ? null : (
+            <StepsForm.StepForm title="密码">
+              <ProFormText.Password
+                label="密码"
+                name="password"
+                rules={[
+                  {
+                    required: true,
+                    message: '密码不能为空',
                   },
-                }),
-              ]}
-            />
-          </StepsForm.StepForm>
+                  {
+                    min: 6,
+                    message: '密码长度不能少于6',
+                  },
+                ]}
+              />
+              <ProFormText.Password
+                label="确认密码"
+                name="repassword"
+                initialValue={user.password}
+                dependencies={['password']}
+                rules={[
+                  {
+                    required: true,
+                    message: '密码不能为空',
+                  },
+                  {
+                    min: 6,
+                    message: '密码长度不能少于6',
+                  },
+                  ({ getFieldValue }) => ({
+                    validator(rule, value) {
+                      if (!value || getFieldValue('password') === value) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject('您输入的两个密码不匹配');
+                    },
+                  }),
+                ]}
+              />
+            </StepsForm.StepForm>
+          )}
         </StepsForm>
       </ProCard>
     </Modal>
