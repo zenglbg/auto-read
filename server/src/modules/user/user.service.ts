@@ -154,7 +154,7 @@ export class UserService {
   }
 
   public currentUser(token) {
-    const { id } = this.jwtService.decode(token) as Partial<User>;
+    const { id } = this.authService.decodeToken(token) as Partial<User>;
     return this.userRepository.findOne(id);
   }
 
@@ -216,6 +216,14 @@ export class UserService {
         return from(this.userRepository.save(newUser));
       }),
       catchError(err => of(err)),
+    );
+  }
+
+  public delete(id: string) {
+    return from(this.userRepository.findOne(id)).pipe(
+      concatMap(exist => {
+        return this.userRepository.remove(exist);
+      }),
     );
   }
 }

@@ -91,6 +91,7 @@ const request = extend({
 
 request.interceptors.request.use((url, options) => {
   const token = getUserToken();
+  // console.log(`token = getUserToken()`, token)
   if (token) {
     //如果有token 就走token逻辑
     const headers = {
@@ -111,9 +112,9 @@ request.interceptors.response.use((response) => {
     history.push('/user/login');
   }
   return response.json().then((res) => {
-    if (res.success) {
-      return res.data;
-    }
+    // if (res.success) {
+    //   return res.data;
+    // }
     return res;
   });
 });

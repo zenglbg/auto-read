@@ -25,7 +25,7 @@ const jwt = {
 export const redisConfig: RedisOptions = {
   host: process.env.redisHost || '127.0.0.1',
   port: Number(process.env.redisPort) || 6379,
-  // password: 'root',
+  password: 'test123',
   db: 1,
 };
 

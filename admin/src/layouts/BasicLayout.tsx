@@ -125,6 +125,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
     [location.pathname],
   );
 
+
   const { formatMessage } = useIntl();
 
   return (

@@ -24,12 +24,12 @@ if [ ! -d "$laradock" ]; then
   cd "$laradock" && cp env-example .env && cd "$ROOT_PATH" || exit
 fi
 function run() {
-  if [ ! -d "${ROOT_PATH}/packages/${1}/node_modules" ]; then
-    cd "${ROOT_PATH}/packages/${1}" || exit
+  if [ ! -d "${ROOT_PATH}/${1}/node_modules" ]; then
+    cd "${ROOT_PATH}/${1}" || exit
     yarn
     yarn dev
   fi
-  cd "${ROOT_PATH}/packages/${1}" || exit
+  cd "${ROOT_PATH}/${1}" || exit
   yarn dev
 }
 
@@ -38,8 +38,8 @@ function server() {
   docker-compose up -d mysql redis
   # docker-compose up -d mysql redis workspace nextjs nestjs
   # docker-compose up -d nginx mysql redis workspace nextjs nestjs
-  run "server" &
-  # run "admin" &
+  # run "server" &
+  run "admin" &
   # run "client"  
   # run "test"
 }

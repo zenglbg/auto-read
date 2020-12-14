@@ -1,8 +1,12 @@
 interface IUser {
-  name: string;
-  avatar: string;
-  email: string;
-  token: string;
+  rowId: React.key;
+  id?: string;
+  userName?: string;
+  avatar?: string;
+  email?: string;
+  phone?: string;
+  status?: string;
+  role?: 0 | 1 | 2 | 3;
 }
 
 interface IFile {

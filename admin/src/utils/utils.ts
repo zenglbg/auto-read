@@ -22,3 +22,15 @@ export const isAntDesignProOrDev = (): boolean => {
 };
 
 export const getPageQuery = () => parse(window.location.href.split('?')[1]);
+
+export const getRandomColor = function () {
+  return '#' + ((Math.random() * 0xffffff) << 0).toString(16);
+};
+
+export const waitTime = (time: number = 100) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(true);
+    }, time);
+  });
+};

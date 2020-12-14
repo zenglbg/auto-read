@@ -1,10 +1,12 @@
 import { Effect, Reducer } from 'umi';
 
 import { queryCurrent, query as queryUsers } from '@/services/user';
+import { setAuthority } from '@/utils/authority';
+import { message } from 'antd';
 
 export interface CurrentUser {
   avatar?: string;
-  name?: string;
+  userName?: string;
   title?: string;
   group?: string;
   signature?: string;
@@ -50,18 +52,26 @@ const UserModel: UserModelType = {
     },
     *fetchCurrent(_, { call, put }) {
       const response = yield call(queryCurrent);
+      let payload = undefined;
+      if (response.success) {
+        payload = response.data;
+      }
+      if (response.msg) {
+        message.error(response.msg);
+      }
       yield put({
         type: 'saveCurrentUser',
-        payload: response,
+        payload,
       });
     },
   },
 
   reducers: {
-    saveCurrentUser(state, action) {
+    saveCurrentUser(state, { payload }) {
+      setAuthority(payload.role);
       return {
         ...state,
-        currentUser: action.payload || {},
+        currentUser: payload || {},
       };
     },
     changeNotifyCount(

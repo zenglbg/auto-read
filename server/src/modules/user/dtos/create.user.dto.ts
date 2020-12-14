@@ -1,4 +1,4 @@
-import { IsString, MinLength, MaxLength } from 'class-validator';
+import { IsString, MinLength, MaxLength, IsEnum } from 'class-validator';
 import { ApiErrorCode } from '@common/enums/api-error-code.enum';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 export class CreateUserDto {
@@ -32,21 +32,7 @@ export class CreateUserDto {
   })
   readonly password: string;
 
-  @ApiProperty()
-  @IsString({
-    message: '邮箱必须为字符串',
-    context: { errorCode: ApiErrorCode.USER_EMAIL_INVALID },
-  })
-  @MinLength(5, {
-    message: '邮箱长度不能小于5',
-    context: { errorCode: ApiErrorCode.USER_EMAIL_INVALID },
-  })
-  @MaxLength(50, {
-    message: '邮箱长度不能超过50',
-    context: { errorCode: ApiErrorCode.USER_EMAIL_INVALID },
-  })
-  readonly email: string;
-
+  
   @ApiPropertyOptional({
     description:
       '[用户角色]: admin-超级管理员 | user-管理员 | test-开发&测试&运营 | guest-普通用户（只能查看）',

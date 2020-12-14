@@ -38,13 +38,12 @@ const Model: LoginModelType = {
         userName,
         password,
       });
-      console.log(response);
       yield put({
         type: 'changeLoginStatus',
         payload: response,
       });
       // Login successfully
-      if (response) {
+      if (response.success) {
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
         message.success('🎉 🎉 🎉  登录成功！');
@@ -62,6 +61,8 @@ const Model: LoginModelType = {
           }
         }
         history.replace(redirect || '/');
+      }else{
+        message.error(`登录失败！${response.msg}`);
       }
     },
 
@@ -82,8 +83,7 @@ const Model: LoginModelType = {
   reducers: {
     changeLoginStatus(state, { payload }) {
       if (payload) {
-        setAuthority(payload.role);
-        saveUserToken(payload.token);
+        saveUserToken(payload.data);
         return {
           ...state,
           status: 'ok',

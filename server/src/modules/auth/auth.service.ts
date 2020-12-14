@@ -1,7 +1,12 @@
 import { verifyBcrypt } from '@common/utils/cryptogram';
 import { encryptPassword } from '@common/utils/cryptogram';
 import { UserService } from '@modules/user/user.service';
-import { forwardRef, Inject, Injectable } from '@nestjs/common';
+import {
+  forwardRef,
+  Inject,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { from } from 'rxjs';
 import { concatMap, map } from 'rxjs/operators';
@@ -14,7 +19,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
   // JWT验证 - Step 2: 校验用户信息
-  validateUser(userName: string, password: string) {
+  public validateUser(userName: string, password: string) {
     console.log('JWT验证 - Step 2: 校验用户信息');
     return from(this.userService.findOne({ userName })).pipe(
       map(user => {
@@ -73,10 +78,16 @@ export class AuthService {
       return token;
     } catch (error) {
       console.log(`注册token 发生了错误`, error);
-      return {
-        code: 600,
-        msg: `账号或密码错误`,
-      };
+      // return {
+      //   code: 600,
+      //   msg: `账号或密码错误`,
+      // };
+      throw new UnauthorizedException('账号或密码错误');
     }
+  }
+
+  public decodeToken(authorization: string) {
+    const token = authorization.split(' ')[1]; // authorization: Bearer xxx
+    return this.jwtService.decode(token);
   }
 }

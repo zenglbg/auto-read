@@ -12,6 +12,7 @@ import {
   UseGuards,
   Headers,
   HttpException,
+  Delete,
 } from '@nestjs/common';
 
 import { UserService } from './user.service';
@@ -32,18 +33,18 @@ import { roleConstans } from '@modules/auth/constants';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post('a')
-  @Roles(2)
-  @UseGuards(JwtAuthGuard)
-  /**
-   * a
-   */
-  public a(@Body() a) {
-    return 323232;
-  }
+  // @Post('testRole')
+  // @Roles(roleConstans.SUPER_ADMIN)
+  // @UseGuards(JwtAuthGuard)
+  // /**
+  //  * a
+  //  */
+  // public testRole(@Body() a) {
+  //   return 323232;
+  // }
 
   @Get()
-  @Roles(roleConstans.DEVELOPER)
+  @Roles(roleConstans.ADMIN)
   @UseGuards(JwtAuthGuard)
   public findAll(@Query() query) {
     return this.userService.findAll(query);
@@ -52,7 +53,8 @@ export class UserController {
   @Get('currentUser')
   @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.OK)
-  public currentUser(@Headers('token') token) {
+  public currentUser(@Headers('authorization') token) {
+    console.log(token)
     return this.userService.currentUser(token);
   }
 
@@ -69,8 +71,8 @@ export class UserController {
   }
 
   @Post('update')
-  @HttpCode(HttpStatus.CREATED)
   @UseGuards(JwtAuthGuard)
+  @HttpCode(HttpStatus.CREATED)
   /**
    * update
    *
@@ -87,5 +89,14 @@ export class UserController {
    */
   public password(@Request() req: Req, @Body() user: UpdatePasswordUserDto) {
     return this.userService.updatePassword(user);
+  }
+
+
+  @Delete('del')
+  @Roles(0)
+  @UseGuards(JwtAuthGuard)
+  public delete(id)
+  {
+    return this.userService.delete(id)
   }
 }

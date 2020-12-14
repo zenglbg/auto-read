@@ -31,6 +31,7 @@ export class AnyExceptionFilter<T> implements ExceptionFilter {
     `;
     Logger.error(logFormat);
     response.status(status).json({
+      success: false,
       statusCode: status,
       path: request.url,
       msg: `Service Error: ${exception}`,
