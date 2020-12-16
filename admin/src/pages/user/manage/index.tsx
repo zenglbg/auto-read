@@ -2,7 +2,7 @@ import React, { useCallback, useRef, useState } from 'react';
 import ProTable, { ProColumns, ActionType } from '@ant-design/pro-table';
 import { Button, Menu, Dropdown, Tag, Divider, Popconfirm } from 'antd';
 import { PlusOutlined, EllipsisOutlined } from '@ant-design/icons';
-import { del, query } from '@/services/user';
+import { ApiUser } from '@/services/user';
 import { getRandomColor, waitTime } from '@/utils/utils';
 import dayjs from 'dayjs';
 import UserEditor from './user.editor';
@@ -21,7 +21,7 @@ const UserManage: React.FunctionComponent<IUserManageProps> = (props) => {
     });
   }, []);
   const delUser = useCallback((id) => {
-    del(id);
+    ApiUser.del(id);
     ref.current?.reload();
   }, []);
   const reload = useCallback(() => {
@@ -40,7 +40,7 @@ const UserManage: React.FunctionComponent<IUserManageProps> = (props) => {
       render: (_, record) => {
         return (
           <Tag color={getRandomColor()}>
-            {['超级管理员', '管理员', '开发&运营&测试', '用户'][_]}
+            {['超级管理员', '管理员', '开发&运营&测试', '用户'][Number(_)]}
           </Tag>
         );
       },
@@ -102,7 +102,7 @@ const UserManage: React.FunctionComponent<IUserManageProps> = (props) => {
         actionRef={ref}
         request={({ pageSize, current, keyword, ...params }) => {
           // console.log(pageSize, current, keyword, params);
-          return query().then((res) => {
+          return ApiUser.query({ pageSize, page: current }).then((res) => {
             if (res.success) {
               setUsers(res.data[0]);
               return {

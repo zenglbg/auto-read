@@ -1,7 +1,7 @@
 import { Reducer, Effect } from 'umi';
 
 import { NoticeIconData } from '@/components/NoticeIcon';
-import { queryNotices } from '@/services/user';
+import { ApiUser } from '@/services/user';
 import { ConnectState } from './connect.d';
 
 export interface NoticeItem extends NoticeIconData {
@@ -40,7 +40,7 @@ const GlobalModel: GlobalModelType = {
 
   effects: {
     *fetchNotices(_, { call, put, select }) {
-      const data = yield call(queryNotices);
+      const data = yield call(ApiUser.queryNotices);
       yield put({
         type: 'saveNotices',
         payload: data,

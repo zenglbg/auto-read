@@ -1,9 +1,13 @@
-import { Reducer } from 'umi';
+import { Reducer, Effect } from 'umi';
 import defaultSettings, { DefaultSettings } from '../../config/defaultSettings';
 
 export interface SettingModelType {
   namespace: 'settings';
   state: DefaultSettings;
+  effects: {
+    getSettings: Effect;
+    updateSettings: Effect;
+  };
   reducers: {
     changeSetting: Reducer<DefaultSettings>;
   };
@@ -19,6 +23,10 @@ const updateColorWeak: (colorWeak: boolean) => void = (colorWeak) => {
 const SettingModel: SettingModelType = {
   namespace: 'settings',
   state: defaultSettings,
+  effects: {
+    *getSettings({ payload }, { call, fork, put }) {},
+    *updateSettings({ payload }, { call, fork, put }) {},
+  },
   reducers: {
     changeSetting(state = defaultSettings, { payload }) {
       const { colorWeak, contentWidth } = payload;

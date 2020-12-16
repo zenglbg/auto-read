@@ -1,4 +1,4 @@
-import { Column, Entity, BeforeInsert, OneToMany } from 'typeorm';
+import { Column, Entity, BeforeInsert, OneToMany, JoinTable } from 'typeorm';
 import { Exclude } from 'class-transformer';
 import { createBcrypt, verifyBcrypt } from '@utils/cryptogram';
 import { Base } from '@entity/base.entity';
@@ -68,5 +68,6 @@ export class User extends Base {
     _ => RasEntity,
     ras => ras.user,
   )
+  @JoinTable()
   ras: Array<RasEntity>;
 }

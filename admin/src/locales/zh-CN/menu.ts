@@ -5,6 +5,8 @@ export default {
   'menu.admin': '管理页',
   'menu.admin.sub-page': '用户管理',
   'menu.admin.user-manage': '用户管理',
+  'menu.admin.file-manage': '脚本管理',
+  'menu.admin.settings-manage': '设置管理',
   'menu.login': '登录',
   'menu.register': '注册',
   'menu.register.result': '注册结果',

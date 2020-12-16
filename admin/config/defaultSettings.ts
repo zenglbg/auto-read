@@ -2,6 +2,13 @@ import { Settings as ProSettings } from '@ant-design/pro-layout';
 
 type DefaultSettings = Partial<ProSettings> & {
   pwa: boolean;
+  mySetting?: {
+    ossRegion: string;
+    ossAccessKeyId: string;
+    ossAccessKeySecret: string;
+    ossHttps: boolean;
+    ossBucket: string;
+  };
 };
 
 const proSettings: DefaultSettings = {

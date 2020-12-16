@@ -7,13 +7,15 @@ export interface LoginParamsType {
   captcha: string;
 }
 
-export async function fakeAccountLogin(params: LoginParamsType) {
-  return request('/user/login', {
-    method: 'POST',
-    data: params,
-  });
-}
+export class ApiLogin {
+  static async fakeAccountLogin(params: LoginParamsType) {
+    return request('/user/login', {
+      method: 'POST',
+      data: params,
+    });
+  }
 
-export async function getFakeCaptcha(mobile: string) {
-  return request(`/api/login/captcha?mobile=${mobile}`);
+  static async getFakeCaptcha(mobile: string) {
+    return request(`/api/login/captcha?mobile=${mobile}`);
+  }
 }

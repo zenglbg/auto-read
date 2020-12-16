@@ -1,0 +1,4 @@
+<!-- wrap: ui.layout -->
+<vertical>
+  <text text="热更新测试" marginTop="300" gravity="center" textSize="50" ></text>
+</vertical>

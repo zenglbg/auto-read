@@ -2,7 +2,7 @@ import ProCard from '@ant-design/pro-card';
 import { Modal } from 'antd';
 import { ProFormSelect, ProFormText, StepsForm } from '@ant-design/pro-form';
 import * as React from 'react';
-import { register, update } from '@/services/user';
+import { ApiUser } from '@/services/user';
 
 interface IUserEditorProps {
   reload: Function;
@@ -13,9 +13,9 @@ interface IUserEditorProps {
 const UserEditor: React.FunctionComponent<IUserEditorProps> = ({ user, setUser, reload }) => {
   const onFinish = async (values: any) => {
     if (user.id) {
-      const res = await update({ ...values, id: user.id });
+      const res = await ApiUser.update({ ...values, id: user.id });
     } else {
-      const res = await register(values);
+      const res = await ApiUser.register(values);
     }
     setUser(undefined);
     reload();

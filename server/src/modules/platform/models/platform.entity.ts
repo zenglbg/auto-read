@@ -1,6 +1,6 @@
 import { Base } from '@common/entity/base.entity';
 import { RasEntity } from '@modules/ras/models/ras.entity';
-import { Column, Entity, OneToMany } from 'typeorm';
+import { Column, Entity, JoinTable, OneToMany } from 'typeorm';
 
 @Entity({
   name: 'platform',
@@ -22,5 +22,6 @@ export class PlatformEntity extends Base {
     _ => RasEntity,
     ras => ras.platform,
   )
+  @JoinTable()
   ras: Array<RasEntity>;
 }

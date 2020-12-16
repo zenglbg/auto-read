@@ -12,7 +12,7 @@ import React, { useState } from 'react';
 import ProForm, { ProFormCaptcha, ProFormCheckbox, ProFormText } from '@ant-design/pro-form';
 import { connect, Dispatch, useIntl, FormattedMessage } from 'umi';
 import { StateType } from '@/models/login';
-import { getFakeCaptcha, LoginParamsType } from '@/services/login';
+import { ApiLogin, LoginParamsType } from '@/services/login';
 import { ConnectState } from '@/models/connect';
 
 import styles from './index.less';
@@ -215,7 +215,7 @@ const Login: React.FC<LoginProps> = (props) => {
                 },
               ]}
               onGetCaptcha={async (mobile) => {
-                const result = await getFakeCaptcha(mobile);
+                const result = await ApiLogin.getFakeCaptcha(mobile);
                 if (result === false) {
                   return;
                 }

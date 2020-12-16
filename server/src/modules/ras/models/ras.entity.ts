@@ -2,7 +2,6 @@ import { Base } from '@common/entity/base.entity';
 import { PlatformEntity } from '@modules/platform/models/platform.entity';
 import { User } from '@modules/user/models/user.entity';
 import * as dayjs from 'dayjs';
-import { platform } from 'process';
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity({
@@ -43,6 +42,9 @@ export class RasEntity extends Base {
   @ManyToOne(
     _ => PlatformEntity,
     platform => platform.ras,
+    {
+      cascade: true,
+    },
   )
   platform: PlatformEntity;
 
@@ -50,6 +52,9 @@ export class RasEntity extends Base {
   @ManyToOne(
     _ => User,
     user => user.ras,
+    {
+      cascade: true,
+    },
   )
   user: User;
 }

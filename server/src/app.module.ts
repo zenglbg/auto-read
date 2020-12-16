@@ -20,6 +20,8 @@ import { AuthModule } from '@modules/auth/auth.module';
 import { UserModule } from '@modules/user/user.module';
 import { TransformInterceptor } from '@common/interceptors/transform.interceptor';
 import { PlatformModule } from './modules/platform/platform.module';
+import { FileModule } from './modules/file/file.module';
+import { SettingModule } from './modules/setting/setting.module';
 
 /** module */
 @Module({
@@ -30,6 +32,8 @@ import { PlatformModule } from './modules/platform/platform.module';
     UserModule,
     RasModule,
     PlatformModule,
+    FileModule,
+    SettingModule,
   ],
   controllers: [AppController],
   providers: [

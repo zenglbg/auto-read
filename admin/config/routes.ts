@@ -47,6 +47,20 @@
                     component: './user/manage',
                     authority: ['super_admin', 'admin'],
                   },
+                  {
+                    path: '/admin/file',
+                    name: 'file-manage',
+                    icon: 'smile',
+                    component: './file',
+                    authority: ['super_admin', 'admin'],
+                  },
+                  // {
+                  //   path: '/admin/settings',
+                  //   name: 'settings-manage',
+                  //   icon: 'smile',
+                  //   component: './settings',
+                  //   authority: ['super_admin', 'admin'],
+                  // },
                 ],
               },
               {

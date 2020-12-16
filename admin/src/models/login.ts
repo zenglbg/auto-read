@@ -1,7 +1,7 @@
 import { stringify } from 'querystring';
 import { history, Reducer, Effect } from 'umi';
 
-import { fakeAccountLogin } from '@/services/login';
+import { ApiLogin } from '@/services/login';
 import { saveUserToken, setAuthority } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
 import { message } from 'antd';
@@ -34,7 +34,7 @@ const Model: LoginModelType = {
   effects: {
     *login({ payload }, { call, put }) {
       const { userName, password } = payload;
-      const response = yield call(fakeAccountLogin, {
+      const response = yield call(ApiLogin.fakeAccountLogin, {
         userName,
         password,
       });
@@ -61,7 +61,7 @@ const Model: LoginModelType = {
           }
         }
         history.replace(redirect || '/');
-      }else{
+      } else {
         message.error(`登录失败！${response.msg}`);
       }
     },

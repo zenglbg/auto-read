@@ -1,6 +1,6 @@
 import { Effect, Reducer } from 'umi';
 
-import { queryCurrent, query as queryUsers } from '@/services/user';
+import { ApiUser } from '@/services/user';
 import { setAuthority } from '@/utils/authority';
 import { message } from 'antd';
 
@@ -44,14 +44,14 @@ const UserModel: UserModelType = {
 
   effects: {
     *fetch(_, { call, put }) {
-      const response = yield call(queryUsers);
+      const response = yield call(ApiUser.query);
       yield put({
         type: 'save',
         payload: response,
       });
     },
     *fetchCurrent(_, { call, put }) {
-      const response = yield call(queryCurrent);
+      const response = yield call(ApiUser.queryCurrent);
       let payload = undefined;
       if (response.success) {
         payload = response.data;
