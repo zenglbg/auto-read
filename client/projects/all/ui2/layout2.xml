@@ -1,0 +1,68 @@
+<frame id="frame" bg="#ffffff">
+  <vertical fitsSystemWindows="true">
+    <!-- <appbar>
+      <linear id="toolbar" clipChildren="false" elevation="0" bg="#ffffff" gravity="center">
+        <img id="mainmenu" w="38" h="38" padding="5" margin="8" tint="#555555" foreground="?android:attr/selectableItemBackgroundBorderless" src="@drawable/ic_menu_black_48dp" />
+        <text id="title" textColor="#080808" gravity="center" margin="12" layout_weight="1" textSize="19" text="多页面底部菜单示例" />
+        <img id="selectTime" w="38" h="38" padding="5" margin="8" tint="#555555" foreground="?android:attr/selectableItemBackgroundBorderless" src="@drawable/ic_person_black_48dp" />
+      </linear>
+    </appbar> -->
+    <vertical id="Main">
+      <viewpager id="viewpager" bg="#ffffff">
+        <frame>
+          <card layout_gravity="center|top" marginBottom="70" w="*" marginLeft="20" marginRight="20" h="auto" cardCornerRadius="0dp" bg="#00000000">
+            <ScrollView>
+              <vertical>
+                <text text="这里编写第一页代码" marginLeft="5" marginRight="5" marginTop="8" textColor="#8c080808" textSize="20sp" />
+              </vertical>
+            </ScrollView>
+          </card>
+        </frame>
+        <frame>
+          <card layout_gravity="center|top" marginBottom="70" w="*" marginLeft="20" marginRight="20" h="auto" cardCornerRadius="0dp" bg="#00000000">
+            <ScrollView>
+              <vertical>
+                <text text="这里编写第二页代码" marginLeft="5" marginRight="5" marginTop="8" textColor="#8c080808" textSize="20sp" />
+              </vertical>
+            </ScrollView>
+          </card>
+        </frame>
+        <frame>
+          <card layout_gravity="center|top" marginBottom="70" w="*" marginLeft="20" marginRight="20" h="auto" cardCornerRadius="0dp" bg="#00000000">
+            <ScrollView>
+              <vertical>
+                <text text="这里编写第三页代码" marginLeft="5" marginRight="5" marginTop="8" textColor="#8c080808" textSize="20sp" />
+              </vertical>
+            </ScrollView>
+          </card>
+        </frame>
+        <frame>
+          <card layout_gravity="center|top" marginBottom="70" w="*" marginLeft="20" marginRight="20" h="auto" cardCornerRadius="0dp" bg="#00000000">
+            <ScrollView>
+              <vertical>
+                <text text="这里编写第四页代码" marginLeft="5" marginRight="5" marginTop="8" textColor="#8c080808" textSize="20sp" />
+              </vertical>
+            </ScrollView>
+          </card>
+        </frame>
+        <frame>
+          <card layout_gravity="center|top" marginBottom="70" w="*" marginLeft="20" marginRight="20" h="auto" cardCornerRadius="0dp" bg="#00000000">
+            <ScrollView>
+              <vertical>
+                <text text="这里编写第五页代码" marginLeft="5" marginRight="5" marginTop="8" textColor="#8c080808" textSize="20sp" />
+              </vertical>
+            </ScrollView>
+          </card>
+        </frame>
+      </viewpager>
+    </vertical>
+  </vertical>
+  <vertical gravity="bottom">
+      {/* 
+    <fab id="start" w="auto" h="auto" src="@drawable/ic_play_arrow_black_48dp"
+          margin="10" layout_gravity="bottom|center" elevation="2" tint="#ffffff" />*/}
+      
+    <tabs-layout data="" layout_gravity="bottom" />
+  </vertical>
+  <vertical id="Off" w="*" h="*"></vertical>
+</frame>

@@ -7,126 +7,82 @@ import * as dayjs from 'dayjs';
 import { concatMap } from 'rxjs/operators';
 import { Repository } from 'typeorm';
 import { File } from './models/file.entity';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class FileService {
+  client: OSS;
   constructor(
     @InjectRepository(File)
     private readonly fileRepository: Repository<File>,
     private readonly settingService: SettingService,
-  ) {}
+    private readonly configService: ConfigService,
+  ) {
+    this.init();
+  }
+
+  init() {
+    const {
+      OSS_REGION,
+      OSS_ACCESSKEYID,
+      OSS_ACCESSKEYSECRET,
+      OSS_BUCKET,
+      OSS_SECURE,
+    } = this.configService.get('_PROCESS_ENV_VALIDATED');
+    this.client = new OSS({
+      region: OSS_REGION,
+      accessKeyId: OSS_ACCESSKEYID,
+      accessKeySecret: OSS_ACCESSKEYSECRET,
+      bucket: OSS_BUCKET,
+      secure: !!Number(OSS_SECURE),
+    });
+  }
 
   uploadFile(file: any, token) {
     const { originalname, mimetype, size, buffer } = file;
     const filename = `/${dayjs().format('YYYY-MM-DD')}/${originalname}`;
     return from(this.fileRepository.findOne({ where: { filename } })).pipe(
-      concatMap(file => {
-        console.log(file, `console.log(file) `);
-        // const version = file ? file.version + 1 : file['version'];
+      concatMap(fileexist => {
+        console.log(fileexist, `console.log(file) `);
         const version = 0;
 
-        return this.settingService.findAll(true, token).pipe(
-          concatMap(
-            ({
-              ossRegion = 'oss-cn-shenzhen',
-              ossAccessKeyId = 'LTAI4G8swDpt9RaCEj6GG1V9',
-              ossBucket = 'zenglbg-auto',
-              ossAccessKeySecret = 'o5z68fEraDkZajuNswPo6sr0R3kKvb',
-              ossHttps = true,
-            }) => {
-              // if (
-              //   !ossRegion ||
-              //   !ossAccessKeyId ||
-              //   !ossBucket ||
-              //   !ossAccessKeySecret
-              // ) {
-              //   throw new HttpException(
-              //     '请完善 OSS 配置',
-              //     HttpStatus.BAD_REQUEST,
-              //   );
-              // }
-
-              console.log(
-                111111111,
-                ossRegion,
-                ossAccessKeyId,
-                ossBucket,
-                ossAccessKeySecret,
-                ossHttps,
-              );
-
-              const client = new OSS({
-                region: ossRegion,
-                accessKeyId: ossAccessKeyId,
-                accessKeySecret: ossAccessKeySecret,
-                bucket: ossBucket,
-                secure: ossHttps,
-              });
-
-              return client.put(originalname, buffer).then(({ url }) => {
-                return this.fileRepository.create({
-                  originalname,
-                  filename,
-                  url,
-                  type: mimetype,
-                  size,
-                  version,
-                });
-              });
-            },
-          ),
-          concatMap(setting => this.fileRepository.save(setting)),
+        return from(this.client.put(originalname, buffer)).pipe(
+          concatMap(({ url }) => {
+            const setting = this.fileRepository.create({
+              originalname,
+              filename,
+              url,
+              type: mimetype,
+              size,
+              version,
+            });
+            if (fileexist) {
+              return this.fileRepository
+                .createQueryBuilder()
+                .update(File)
+                .set(setting)
+                .where('id = :id', { id: fileexist.id })
+                .execute();
+            } else {
+              return this.fileRepository.save(setting);
+            }
+          }),
         );
       }),
     );
-    // return from(this.fileRepository.findOne({ where: { filename } })).pipe(
-    //   concatMap(file => {
-    //     console.log(file);
-    //     if (file) {
-    //       throw new HttpException('文件已存在！', HttpStatus.BAD_REQUEST);
-    //     }
-    //     return this.settingService.findAll(true);
-    //   }),
-    //   concatMap(
-    //     ({
-    //       ossRegion = 'oss-cn-shenzhen.aliyuncs.com',
-    //       ossAccessKeyId = 'LTAI4G8swDpt9RaCEj6GG1V9',
-    //       ossBucket = 'zenglbg-auto',
-    //       ossAccessKeySecret = 'o5z68fEraDkZajuNswPo6sr0R3kKvb',
-    //       ossHttps = true,
-    //     }) => {
-    //       if (
-    //         !ossRegion ||
-    //         !ossAccessKeyId ||
-    //         !ossBucket ||
-    //         !ossAccessKeySecret
-    //       ) {
-    //         throw new HttpException('请完善 OSS 配置', HttpStatus.BAD_REQUEST);
-    //       }
-    //       const client = new OSS({
-    //         region: ossRegion,
-    //         accessKeyId: ossAccessKeyId,
-    //         accessKeySecret: ossAccessKeySecret,
-    //         bucket: ossBucket,
-    //         secure: ossHttps,
-    //       });
-
-    //       return client.put(filename, buffer).then(({ url }) => {
-    //         return this.fileRepository.create({
-    //           originalname,
-    //           filename,
-    //           url,
-    //           type: mimetype,
-    //           size,
-    //         });
-    //       });
-    //     },
-    //   ),
-    //   concatMap(setting => this.fileRepository.save(setting)),
-    // );
   }
 
   getFiles() {
     return this.fileRepository.findAndCount();
+  }
+
+  delFile(id: string) {
+    return from(this.fileRepository.findOne(id)).pipe(
+      concatMap(file => {
+        return this.client
+          .delete(file.filename)
+          .then(_ => this.fileRepository.remove(file));
+      }),
+    );
   }
 }

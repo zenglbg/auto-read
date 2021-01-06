@@ -30,6 +30,8 @@ module.exports = {
     engines: false,
     files: false,
     http: false,
+    util: false,
+
 
     context: false,
     importClass: false,
@@ -70,6 +72,7 @@ module.exports = {
   },
   rules: {
     'no-console': ['off'],
+    'no-underscore-dangle': 0,
     '@typescript-eslint/explicit-module-boundary-types': [
       'error',
       {

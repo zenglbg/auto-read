@@ -64,6 +64,12 @@
                 ],
               },
               {
+                path: '/ras',
+                name: 'ras',
+                icon: 'KeyOutlined',
+                component: './ras',
+              },
+              {
                 name: 'list.table-list',
                 icon: 'table',
                 path: '/list',

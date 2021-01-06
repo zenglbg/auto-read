@@ -22,7 +22,7 @@ const UserEditor: React.FunctionComponent<IUserEditorProps> = ({ user, setUser, 
   };
   console.log(user, user.id);
   return (
-    <Modal visible={true} onCancel={() => setUser(undefined)}>
+    <Modal visible onCancel={() => setUser(undefined)}>
       <ProCard title="编辑用户" headerBordered>
         <StepsForm onFinish={onFinish}>
           <StepsForm.StepForm

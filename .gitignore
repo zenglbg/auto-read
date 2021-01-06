@@ -6,3 +6,6 @@
 /admin-finish
 yarn.lock
 package-lock.json
+/code-push-server
+code-push-server
+.DS_Store

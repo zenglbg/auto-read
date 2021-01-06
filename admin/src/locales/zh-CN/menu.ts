@@ -3,6 +3,7 @@ export default {
   'menu.more-blocks': '更多区块',
   'menu.home': '首页',
   'menu.admin': '管理页',
+  'menu.ras': '激活码管理',
   'menu.admin.sub-page': '用户管理',
   'menu.admin.user-manage': '用户管理',
   'menu.admin.file-manage': '脚本管理',

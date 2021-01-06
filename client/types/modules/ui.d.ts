@@ -44,22 +44,23 @@
 // type View = any;
 
 interface UILike {
-    toString(): string;
+  toString(): string;
 }
 
-interface Ui {  
-    layout(xml: UILike | any): void;
-    inflate(xml: UILike | any, parent?: View): void;
-    findView(id: string): View;
-    finish(): void;
-    setContentView(view: View): void;
-    run(callback: Function): void;
-    post(callback: Function, delay?: number): void;
-    statusBarColor(color: any): void;
-    showPopupMenu(view: View, menu: any): void;
-
-    emitter: EventEmitter;
-    [key: string]: UiObject;
+interface Ui {
+  layout(xml: UILike | any): void;
+  inflate(xml: UILike | any, parent?: View): void;
+  findView(id: string): View;
+  finish(): void;
+  setContentView(view: View): void;
+  run(callback: Function): void;
+  post(callback: Function, delay?: number): void;
+  statusBarColor(color: any): void;
+  showPopupMenu(view: View, menu: any): void;
+  registerWidget(layoutname: string, layoutfn: Function): void;
+  emitter: EventEmitter;
+  Widget: Function;
+  [key: string]: UiObject;
 }
 
 declare const ui: Ui;

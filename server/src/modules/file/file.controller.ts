@@ -6,6 +6,8 @@ import {
   UseGuards,
   Headers,
   UseInterceptors,
+  Delete,
+  Body,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { JwtAuthGuard } from '@modules/auth/guards/jwt-auth.guard';
@@ -38,5 +40,10 @@ export class FileController {
   // @UseGuards(JwtAuthGuard)
   public getFiles() {
     return this.fileService.getFiles();
+  }
+
+  @Delete('del')
+  public delFile(@Body() id: string) {
+    return this.fileService.delFile(id)
   }
 }

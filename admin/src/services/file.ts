@@ -4,12 +4,16 @@ export class ApiFile {
   static upload(file: any) {
     const formData = new FormData();
     formData.append('file', file);
-    request.post('/file/upload', {
+    return request.post('/file/upload', {
       data: formData,
     });
   }
 
   static getFiles(params: Object) {
     return request('/file', { params });
+  }
+
+  static delFile(id: string) {
+    return request.delete('/file/del', { body: id });
   }
 }

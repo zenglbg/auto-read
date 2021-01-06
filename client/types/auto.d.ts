@@ -18,6 +18,7 @@
 /// <reference path="./modules/storages.d.ts" />
 /// <reference path="./modules/widgets.d.ts" />
 /// <reference path="./modules/ui.d.ts" />
+/// <reference path="./modules/util.d.ts" />
 /// <reference path="./modules/threads.d.ts" />
 
 export { };

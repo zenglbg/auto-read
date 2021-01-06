@@ -6,7 +6,7 @@ export class RasController {
   constructor(private readonly rasService: RasService) {}
 
   @Get()
-  getRas() {
+  getAll() {
     return this.rasService.getRas();
   }
 

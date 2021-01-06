@@ -1,0 +1,75 @@
+<drawer id="drawer">
+  <vertical>
+    <appbar>
+      <toolbar id="toolbar" bg="#ff4fb3ff" title="appName"/>
+    </appbar>
+    <vertical gravity="center" layout_weight="1">
+      <frame>
+        <View bg="#ff4fb3ff" h="54"/>
+        <viewpager h="84" id="pager">
+          <vertical>
+            <card w="*" h="68" margin="10 8" cardCornerRadius="6dp"
+                  cardElevation="2dp" gravity="center">
+              <linear>
+                <vertical margin="10" layout_gravity="center_vertical" layout_weight="1">
+                  <text id="name" size="18" color="#444444" text="无帐号"/>
+                  <text id="integral"  padding="1" size="16" text="..." foreground="?selectableItemBackground"/>
+                </vertical>
+                <button id="login" w="90" text="登录账号" color="#ff5d85ff" style="Widget.AppCompat.Button.Borderless.Colored"/>
+              </linear>
+            </card>
+          </vertical>
+          <vertical>
+            <card w="*" h="68" margin="10 8" cardCornerRadius="6dp"
+                  cardElevation="2dp" gravity="center">
+              <linear>
+                <vertical margin="10" layout_gravity="center_vertical" layout_weight="1">
+                  <text id="imei" textIsSelectable="true" size="18" color="#444444" text="{}"/>
+                  <text id="Etime" size="16" text="..."/>
+                </vertical>
+                <button id="recharge" w="70" text="绑卡" color="#ff5d85ff" style="Widget.AppCompat.Button.Borderless.Colored"/>
+              </linear>
+            </card>
+          </vertical>
+        </viewpager>
+      </frame>
+      <tabs w="40" id="tabs" tabIndicatorColor="#777777" bg="#cfcfcf"  h="2"/>
+      <vertical padding="10 6 0 6" bg="#ffffff" w="*" h="auto" margin="0 5" elevation="1dp">
+        <Switch id="autoService" w="*" checked="{{false}}" textColor="#666666" text="无障碍服务"/>
+        <View h="5"/>
+        <Switch w="*" textColor="#666666" text="不做评论任务" id="noComment"/>
+      </vertical>
+      <vertical margin="0 5" bg="#ffffff" elevation="1dp" padding="5 5 10 5" w="*" h="auto">
+        <linear>
+          <checkbox id="DYcheck" text="抖音" layout_weight="1"/>
+          <text text="单次运行任务上限↓"/>
+        </linear>
+        <linear>
+          <seekbar id="DYseekbar" max="50" layout_weight="1"/>
+          <text gravity="center" id="DYlimit"/>
+        </linear>
+        <View h="5"/>
+        <linear gravity="center">
+          <checkbox id="KScheck" text="快手" layout_weight="1"/>
+          <text text="单次运行任务上限↓"/>
+        </linear>
+        <linear>
+          <seekbar id="KSseekbar" max="50" layout_weight="1"/>
+          <text gravity="center" id="KSlimit"/>
+        </linear>
+      </vertical>
+      <linear>
+        <text layout_weight="1" size="19" color="#222222" text="日志"/>
+        <button id="tolog" h="40" text="全部日志" style="Widget.AppCompat.Button.Borderless.Colored"/>
+      </linear>
+      <text paddingLeft="5" size="16" id="oneLog"/>
+      <list bg="#ffffff" elevation="1dp" h="*" id="logList">
+        <linear>
+          <text size="13" textColor="#555555" text="{{'time'}} "/>
+          <text size="13" text="{{'message'}}"/>
+        </linear>
+      </list>
+    </vertical>
+    <button id="start" text="开始运行" tag="ScriptTag" color="#ffffff" bg="#FF4FB3FF" foreground="?selectableItemBackground"/>
+  </vertical>
+</drawer>
