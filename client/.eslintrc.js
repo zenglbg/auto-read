@@ -31,6 +31,7 @@ module.exports = {
     files: false,
     http: false,
     util: false,
+    colors: false,
 
 
     context: false,

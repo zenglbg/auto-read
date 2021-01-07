@@ -1,0 +1,4 @@
+<vertical id="_bg" w="*" bg="{{tabs_data.bg}}" padding="0 10" gravity="center" >
+  <img w="{{tabs_data.srcSize}}" id="_src" tint="{{tabs_data.selectColor.off}}" />
+  <text w="auto" id="_text" textSize="{{tabs_data.textSize}}" textColor="{{tabs_data.selectColor.off}}" />
+</vertical>

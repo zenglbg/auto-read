@@ -1,0 +1,36 @@
+{
+  "name": "client1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "start": "npm run watch",
+    "watch": "npm run dev -- --watch",
+    "dev": "webpack --config webpack/webpack.dev.js",
+    "build": "webpack --config webpack/webpack.prod.js",
+    "lint": "eslint --format './node_modules/eslint-formatter-friendly/index.js' \"projects/**/*.ts\"",
+    "lint:fix": "npm run lint -- --fix"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-proposal-decorators": "^7.12.12",
+    "@babel/plugin-transform-runtime": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-react": "^7.12.10",
+    "babel-loader": "^8.2.2",
+    "babel-preset-env": "^1.7.0",
+    "copy-webpack-plugin": "^7.0.0",
+    "eslint-loader": "^4.0.2",
+    "glob": "^7.1.6",
+    "webpack": "^5.11.1",
+    "webpack-cli": "^4.3.1",
+    "webpack-merge": "^5.7.3"
+  },
+  "dependencies": {
+    "lodash": "^4.17.20"
+  }
+}

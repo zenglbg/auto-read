@@ -1,6 +1,6 @@
 interface Point {
-    x: number;
-    y: number;
+  x: number;
+  y: number;
 }
 
 declare function sleep(n: number): void;
@@ -46,4 +46,4 @@ declare function classNameContains(str: string): UiSelector;
 declare function classNameStartsWith(prefix: string): UiSelector;
 declare function classNameEndsWith(suffix: string): UiSelector;
 declare function classNameMatches(reg: string | RegExp): UiSelector;
-
+declare function defineAttr(type: string, callback: Function): void;

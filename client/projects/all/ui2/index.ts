@@ -1,16 +1,8 @@
 'ui';
 
-import tabsLayout from './tabs-layout.xml';
 import layout from './layout.xml';
 // import layout from './layout1.xml';
-
-const tabsBtnLayout = function () {
-  function TabsBtnLayout() {
-    ui.Widget.call(this);
-  }
-  util.extend(TabsBtnLayout, ui.Widget);
-};
-
+toast(defineAttr);
 class Home {
   public file = 'https://12a112dd270d.ngrok.io/api/file';
 
@@ -66,8 +58,6 @@ class Home {
 
   public render() {
     this.willMount();
-    console.log(tabsLayout);
-    tabsBtnLayout();
     layout(this.state, this.tabs);
     this.didMount();
   }
