@@ -16,6 +16,12 @@ export const TabsBtn = (tabsData, tabsView, selectView) => {
 
   }
   util.extend(tabsbtn, ui.Widget)
-
-
+  tabsbtn.prototype.render = function () {
+    return (
+      `<vertical id="_bg" w="*" bg="{{tabsData.bg}}" padding="0 10" gravity="center" >
+        <img w="{{tabsData.srcSize}}" id="_src" tint="{{tabsData.selectColor.off}}" />
+        <text w="auto" id="_text" textSize="{{tabsData.textSize}}" textColor="{{tabsData.selectColor.off}}" />
+      </vertical>`
+    )
+  }
 }

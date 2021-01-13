@@ -12,6 +12,7 @@ class Home {
     color: "#080808",
     tabsView: [],
     selectView: 0,
+    blblankImg: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591742950226&di=2c2a83fe81283a6c8f69979c9b2a8385&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201205%2F07%2F200343cx0b5wwqdp0wbdb3.jpg",
     tabsData: {
       bg: "#ffffff",
       selectColor: {
@@ -35,11 +36,11 @@ class Home {
   }
   init () {
     // toast(this.state.arr)
-    TabsBtn(this.state.tabsData, this.state.tabsView, this.state.selectView)
+    // TabsBtn(this.state.tabsData, this.state.tabsView, this.state.selectView)
     this.render()
   }
   render () {
-    App()
+    App(this.state)
   }
 }
 

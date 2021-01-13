@@ -2,6 +2,8 @@ const path = require('path')
 
 const { getEntry, resolve } = require('./util')
 
+
+
 module.exports = {
   entry: getEntry(),
   output: {
@@ -11,7 +13,7 @@ module.exports = {
   resolve: {
     extensions: [".js", ".vue", ".json"],
     alias: {
-      "@": resolve("src")
+      // "@": resolve("src")
     }
   },
   module: {
@@ -30,5 +32,7 @@ module.exports = {
         loader: 'xml-loader',
       }
     ]
-  }
+  },
+  plugins: [
+  ]
 }
